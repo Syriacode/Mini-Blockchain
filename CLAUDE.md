@@ -24,6 +24,10 @@ All logic is in `blockchain.py`: a `Block` dataclass (SHA-256 over every field e
 The stablecoin project now lives in its own repository, https://github.com/Syriacode/upgradeable-stablecoin
 (full history preserved). Don't recreate a `02-stablecoin` folder here.
 
+## Learning roadmap
+
+`ROADMAP.md` holds the plan, the progress table, and the "Rules for Claude" for every new project chat. When a project is finished, update its row (status ✅ and repo link) and add any new Level-up tip.
+
 ## Environment
 
 The machine runs Windows. Shell commands in the docs are POSIX, so run them with the Bash tool.

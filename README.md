@@ -1,5 +1,6 @@
 # Mini-Blockchain
 
+My blockchain + Claude Code learning hub. See the **[Learning Roadmap](ROADMAP.md)** for the plan, progress, and how each project starts.
 
 
 | # | Project | Concepts | Status |
