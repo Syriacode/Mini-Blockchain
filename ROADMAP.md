@@ -56,7 +56,7 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 |---|---|---|---|---|---|---|
 | ✅ | — | Simple chain | Python | blocks, hashing, proof-of-work | first prompts, reading code | [Mini-Blockchain/01-simple-chain](01-simple-chain) |
 | ✅ | — | Upgradeable stablecoin | Solidity | UUPS proxy, roles, minter allowances, pause, blocklist, fuzz/invariant tests | plan mode, CLAUDE.md, `!` commands, break-it-on-purpose testing | [upgradeable-stablecoin](https://github.com/Syriacode/upgradeable-stablecoin) |
-| ⬜ | Day 0 | **Project kit** | — | — | **custom skill** (`/new-project`), GitHub CLI, **permission rules** | |
+| ✅ | Day 0 | **Project kit** | Bash | — | **custom skill** (`/new-project`), GitHub CLI, **permission rules** | [claude-project-kit](https://github.com/Syriacode/claude-project-kit) |
 
 ### Week 1: Refresh the basics
 
@@ -90,3 +90,4 @@ After Week 2: review what clicked, then plan Weeks 3–4 (including the Go reser
 2. **Break it on purpose:** after tests pass, have Claude remove a safety check and confirm a test fails. That's how you know the tests protect something.
 3. **`CLAUDE.md` is Claude's memory for a repo.** Keep it accurate, because every session reads it.
 4. **When Claude does something you'd want every time, turn it into a skill.** (Day 0)
+5. **Put a skill's mechanical steps in a tested script, and keep risky commands as visible steps.** Permission rules only see the command Claude types, not what runs inside a script. (Day 0)
