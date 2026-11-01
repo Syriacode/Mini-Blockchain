@@ -1,0 +1,33 @@
+name: stablecoin
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    name: Format, build, test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 02-stablecoin
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Show Forge version
+        run: forge --version
+
+      - name: Check formatting
+        run: forge fmt --check
+
+      - name: Build
+        run: forge build --sizes
+
+      - name: Test
+        run: forge test -vvv
