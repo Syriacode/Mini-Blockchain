@@ -80,7 +80,48 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 | ⬜ | Fri | Mini dApp front end for the testnet token | TypeScript | wallet connection, sending transactions | testing a web page with Claude in a browser | |
 | ⬜ | Weekend | Break it, fix it: 4 vulnerable contracts | Solidity | real attack types and fixes | **parallel sessions** (worktrees), `claude -p` | |
 
-After Week 2: review what clicked, then plan Weeks 3–4 (including the Go reserve service and the multi-brand factory for the stablecoin track).
+After Week 2: review what clicked before starting Week 3.
+
+### Week 3: Backend services and infrastructure (from job descriptions)
+
+| Status | When | Project | Lang | Blockchain concept | Claude Code technique | Repo |
+|---|---|---|---|---|---|---|
+| ⬜ | Mon | Payments ledger API: double-entry ledger with Postgres and idempotency keys | Go | payment correctness, exactly-once transfers | **MCP server** (connect Claude Code to Postgres) | |
+| ⬜ | Tue | Containerize the chain reader + indexer (Dockerfile, docker-compose with Postgres) | Go + Docker | running node clients and services | background commands (`&`), `/bashes` | |
+| ⬜ | Wed | Infrastructure as Code: Terraform for the indexer stack (Docker provider, local) | Terraform | reproducible infra, secrets out of code | **headless `claude -p` in CI** (review a `terraform plan`) | |
+| ⬜ | Thu | Stablecoin reserve service: watch mint/burn events, reconcile supply vs. reserves, alert on drift | Go | proof of reserves, reconciliation | **parallel subagents** (one per component) | |
+| ⬜ | Fri | Transaction signer service: EIP-155/EIP-1559 signing, keystore, signing policy rules | Go | key management, custody, nonce handling | extended thinking (`think hard`) for design reviews | |
+| ⬜ | Weekend | Multi-brand stablecoin factory (CREATE2 clones of the upgradeable stablecoin) | Solidity | factories, minimal proxies, deterministic addresses | **GitHub Actions with `@claude`** PR reviews | |
+
+### Week 4: Security, Rust and analysis (from job descriptions)
+
+| Status | When | Project | Lang | Blockchain concept | Claude Code technique | Repo |
+|---|---|---|---|---|---|---|
+| ⬜ | Mon | Static analysis: run Slither and Aderyn on all my contracts, triage every finding | Solidity | automated auditing, false positives | custom slash-command skill (`/audit`) | |
+| ⬜ | Tue | Professional audit report for the Week 2 "break it" contracts (severity, impact, fix, test) | Markdown + Solidity | audit process, threat modeling | **output styles** for report writing | |
+| ⬜ | Wed | Rust intro: Merkle tree crate with proofs and tests | Rust | Merkle trees, Rust ownership | user-level `~/.claude/CLAUDE.md` + `/memory` | |
+| ⬜ | Thu | Fund-flow tracer: follow funds from an address N hops, export a graph and a short findings report | Python | blockchain forensics, transaction tracing | **notebook editing** (Jupyter) with Claude | |
+| ⬜ | Fri | Tokenized treasury fund: permissioned token (allowlist, transfer rules, NAV oracle) + 1-page client brief | Solidity + Markdown | tokenization, compliance controls | writing for executives with Claude | |
+| ⬜ | Weekend | Capstone: deploy stablecoin + reserve service + dApp on Base Sepolia; portfolio README; 3-minute demo video | all | end-to-end system | **plugins**: package my kit for reuse | |
+
+---
+
+## Job map (which project proves which requirement)
+
+Added from job descriptions on 2026-11-02. When a project is ✅, add it to the matching resume version.
+
+| Requirement in job posts | Where it shows up | Proved by |
+|---|---|---|
+| Solidity / EVM smart contracts in production; upgradeability, access control | Coinbase Stablecoins, Chainlink, FTI | Upgradeable stablecoin ✅, ETH Vault ✅, Multisig, Timelock, Permit, Factory |
+| Onchain security, audits, key management | Coinbase Stablecoins, Chainlink, Anchorage | Break it/fix it, Slither triage, Audit report, Signer service |
+| Go backend services, distributed systems | Coinbase (Stablecoins, Payments, Blockchain Network, Data Foundations), Anchorage, Robinhood | Chain reader, Indexer, Payments ledger, Reserve service, Signer service |
+| Payments correctness (ledgers, idempotency) | Coinbase Payments Platform, Mastercard | Payments ledger API |
+| Infrastructure as Code (Terraform), Docker, cloud | Coinbase Data Foundations, Anchorage | Containerize, Terraform project |
+| Indexing onchain data, event logs, reorgs | Coinbase Data Foundations / Blockchain Network | Transfer event indexer |
+| Python / TypeScript, APIs, explaining tech to customers | Alchemy Solutions, PwC | Token balance script, dApp front end, Tokenized fund brief, teaching record |
+| Rust, cryptography | Chainlink Product Security | Rust Merkle crate, Permit (EIP-712 signatures) |
+| Blockchain forensics, fund-flow tracing, client reports | FTI Consulting | Fund-flow tracer, Audit report |
+| Tokenization, custody, stablecoin strategy | PwC, Coinbase Stablecoins, Anchorage | Upgradeable stablecoin ✅, Reserve service, Tokenized fund |
 
 ---
 
