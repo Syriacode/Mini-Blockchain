@@ -62,7 +62,7 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 
 | Status | When | Project | Lang | Blockchain concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Mon | ETH Vault: deposit, withdraw, events | Solidity | payable, mappings, reentrancy | `@file` mentions; **rewind** (Esc Esc) | |
+| ✅ | Mon | ETH Vault: deposit, withdraw, events | Solidity | payable, mappings, reentrancy | `@file` mentions; **rewind** (Esc Esc) | [eth-vault](https://github.com/Syriacode/eth-vault) |
 | ⬜ | Tue | 2-of-3 Multisig wallet | Solidity | multi-party approvals, admin-key protection | **test-driven**: failing tests first | |
 | ⬜ | Wed | Chain reader CLI: latest block, balances | Go | RPC, blocks, go-ethereum | learning a new language with Claude | |
 | ⬜ | Thu | Timelock: delayed admin actions | Solidity | governance, time-based security | **custom subagent** (security reviewer) | |
@@ -91,3 +91,6 @@ After Week 2: review what clicked, then plan Weeks 3–4 (including the Go reser
 3. **`CLAUDE.md` is Claude's memory for a repo.** Keep it accurate, because every session reads it.
 4. **When Claude does something you'd want every time, turn it into a skill.** (Day 0)
 5. **Put a skill's mechanical steps in a tested script, and keep risky commands as visible steps.** Permission rules only see the command Claude types, not what runs inside a script. (Day 0)
+6. **Commit before you experiment, then rewind (`Esc Esc` → Restore code) to undo it.** Rewind only tracks Claude's
+   file edits, not shell commands, so git is the backstop. `@`-mention the file a prompt is about, so Claude works from
+   exactly that file. (Week 1 Mon)
