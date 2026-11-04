@@ -64,7 +64,7 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 |---|---|---|---|---|---|---|
 | ✅ | Mon | ETH Vault: deposit, withdraw, events | Solidity | payable, mappings, reentrancy | `@file` mentions; **rewind** (Esc Esc) | [eth-vault](https://github.com/Syriacode/eth-vault) |
 | ✅ | Tue | 2-of-3 Multisig wallet | Solidity | multi-party approvals, admin-key protection | **test-driven**: failing tests first | [multisig-wallet](https://github.com/Syriacode/multisig-wallet) |
-| ⬜ | Wed | Chain reader CLI: latest block, balances | Go | RPC, blocks, go-ethereum | learning a new language with Claude | |
+| ✅ | Wed | Chain reader CLI: latest block, balances | Go | RPC, blocks, go-ethereum | learning a new language with Claude | [chain-reader-cli](https://github.com/Syriacode/chain-reader-cli) |
 | ⬜ | Thu | Timelock: delayed admin actions | Solidity | governance, time-based security | **custom subagent** (security reviewer) | |
 | ⬜ | Fri | Token balance script | TypeScript | ERC-20 reads, events, viem | **hooks** (auto-format on edit) | |
 | ⬜ | Weekend | Deploy and verify a token on Base Sepolia | Solidity | test wallets, faucets, Basescan verification | secrets safety (deny `.env`), `/code-review` | |
@@ -114,7 +114,7 @@ Added from job descriptions on 2026-11-02. When a project is ✅, add it to the 
 |---|---|---|
 | Solidity / EVM smart contracts in production; upgradeability, access control | Coinbase Stablecoins, Chainlink, FTI | Upgradeable stablecoin ✅, ETH Vault ✅, Multisig ✅, Timelock, Permit, Factory |
 | Onchain security, audits, key management | Coinbase Stablecoins, Chainlink, Anchorage | Break it/fix it, Slither triage, Audit report, Signer service |
-| Go backend services, distributed systems | Coinbase (Stablecoins, Payments, Blockchain Network, Data Foundations), Anchorage, Robinhood | Chain reader, Indexer, Payments ledger, Reserve service, Signer service |
+| Go backend services, distributed systems | Coinbase (Stablecoins, Payments, Blockchain Network, Data Foundations), Anchorage, Robinhood | Chain reader ✅, Indexer, Payments ledger, Reserve service, Signer service |
 | Payments correctness (ledgers, idempotency) | Coinbase Payments Platform, Mastercard | Payments ledger API |
 | Infrastructure as Code (Terraform), Docker, cloud | Coinbase Data Foundations, Anchorage | Containerize, Terraform project |
 | Indexing onchain data, event logs, reorgs | Coinbase Data Foundations / Blockchain Network | Transfer event indexer |
@@ -138,3 +138,6 @@ Added from job descriptions on 2026-11-02. When a project is ✅, add it to the 
 7. **Commit the failing tests, then let git prove the fix.** After a red commit, `git diff --stat test/` shows in one line
    whether Claude changed your specification or your code. Put "never edit a test to make it pass" in `CLAUDE.md`.
    (Week 1 Tue)
+8. **Tell Claude how to teach you, once, in `CLAUDE.md`.** When learning a language, ask for comparisons to what you
+   already know, predict before you ask, and hand-type the one function where the real idea lives. Reuse the section
+   for Rust in Week 4. (Week 1 Wed)
