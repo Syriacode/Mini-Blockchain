@@ -63,7 +63,7 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 | Status | When | Project | Lang | Blockchain concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
 | ✅ | Mon | ETH Vault: deposit, withdraw, events | Solidity | payable, mappings, reentrancy | `@file` mentions; **rewind** (Esc Esc) | [eth-vault](https://github.com/Syriacode/eth-vault) |
-| ⬜ | Tue | 2-of-3 Multisig wallet | Solidity | multi-party approvals, admin-key protection | **test-driven**: failing tests first | |
+| ✅ | Tue | 2-of-3 Multisig wallet | Solidity | multi-party approvals, admin-key protection | **test-driven**: failing tests first | [multisig-wallet](https://github.com/Syriacode/multisig-wallet) |
 | ⬜ | Wed | Chain reader CLI: latest block, balances | Go | RPC, blocks, go-ethereum | learning a new language with Claude | |
 | ⬜ | Thu | Timelock: delayed admin actions | Solidity | governance, time-based security | **custom subagent** (security reviewer) | |
 | ⬜ | Fri | Token balance script | TypeScript | ERC-20 reads, events, viem | **hooks** (auto-format on edit) | |
@@ -112,7 +112,7 @@ Added from job descriptions on 2026-11-02. When a project is ✅, add it to the 
 
 | Requirement in job posts | Where it shows up | Proved by |
 |---|---|---|
-| Solidity / EVM smart contracts in production; upgradeability, access control | Coinbase Stablecoins, Chainlink, FTI | Upgradeable stablecoin ✅, ETH Vault ✅, Multisig, Timelock, Permit, Factory |
+| Solidity / EVM smart contracts in production; upgradeability, access control | Coinbase Stablecoins, Chainlink, FTI | Upgradeable stablecoin ✅, ETH Vault ✅, Multisig ✅, Timelock, Permit, Factory |
 | Onchain security, audits, key management | Coinbase Stablecoins, Chainlink, Anchorage | Break it/fix it, Slither triage, Audit report, Signer service |
 | Go backend services, distributed systems | Coinbase (Stablecoins, Payments, Blockchain Network, Data Foundations), Anchorage, Robinhood | Chain reader, Indexer, Payments ledger, Reserve service, Signer service |
 | Payments correctness (ledgers, idempotency) | Coinbase Payments Platform, Mastercard | Payments ledger API |
@@ -135,3 +135,6 @@ Added from job descriptions on 2026-11-02. When a project is ✅, add it to the 
 6. **Commit before you experiment, then rewind (`Esc Esc` → Restore code) to undo it.** Rewind only tracks Claude's
    file edits, not shell commands, so git is the backstop. `@`-mention the file a prompt is about, so Claude works from
    exactly that file. (Week 1 Mon)
+7. **Commit the failing tests, then let git prove the fix.** After a red commit, `git diff --stat test/` shows in one line
+   whether Claude changed your specification or your code. Put "never edit a test to make it pass" in `CLAUDE.md`.
+   (Week 1 Tue)
