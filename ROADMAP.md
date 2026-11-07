@@ -66,7 +66,7 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 | ✅ | Tue | 2-of-3 Multisig wallet | Solidity | multi-party approvals, admin-key protection | **test-driven**: failing tests first | [multisig-wallet](https://github.com/Syriacode/multisig-wallet) |
 | ✅ | Wed | Chain reader CLI: latest block, balances | Go | RPC, blocks, go-ethereum | learning a new language with Claude | [chain-reader-cli](https://github.com/Syriacode/chain-reader-cli) |
 | ✅ | Thu | Timelock: delayed admin actions | Solidity | governance, time-based security | **custom subagent** (security reviewer) | [timelock](https://github.com/Syriacode/timelock) |
-| ⬜ | Fri | Token balance script | TypeScript | ERC-20 reads, events, viem | **hooks** (auto-format on edit) | |
+| ✅ | Fri | Token balance script | TypeScript | ERC-20 reads, events, viem | **hooks** (auto-format on edit) | [token-balance-script](https://github.com/Syriacode/token-balance-script) |
 | ⬜ | Weekend | Deploy and verify a token on Base Sepolia | Solidity | test wallets, faucets, Basescan verification | secrets safety (deny `.env`), `/code-review` | |
 
 ### Week 2: Stablecoin-adjacent building blocks
@@ -144,3 +144,7 @@ Added from job descriptions on 2026-11-02. When a project is ✅, add it to the 
 9. **Give the reviewer a different job from the builder, and measure it before you trust it.** A subagent has fresh
    context, limited tools and one job. Plant a bug and run it blind, because a clean report means nothing until you've
    seen it catch something. Then turn each real finding into a test. (Week 1 Thu)
+10. **Turn rules that must always hold into hooks, and keep CI as the backstop.** `CLAUDE.md` is advice; a hook runs
+    every time. Test a hook by piping JSON into it before you trust it, keep it fast and narrow, and exit 2 with a
+    clear message when Claude needs to fix something. Hooks only see Claude's own tool calls, so the same check also
+    belongs in CI. (Week 1 Fri)
