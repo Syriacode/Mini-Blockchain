@@ -50,7 +50,11 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
   Claude Code. I'll look up anything I don't understand.
 - **My setup:** Windows with Git Bash; Claude Code in the terminal; Foundry installed; GitHub user **Syriacode**.
   (From Day 0 on: GitHub CLI `gh` and my `/new-project` skill.) For AI projects (Week 4 on): Python 3 with a virtual
-  environment, and an LLM API key.
+  environment, and Ollama for local models.
+- **My PC (for model choices):** Intel i7-1260P, **16 GB RAM**, Intel Iris Xe integrated graphics (**no NVIDIA GPU**,
+  so models run on the CPU), plenty of disk. Default to a **3B–4B chat model** plus a small local embedding model;
+  7B–8B only as an optional comparison. Run Ollama natively on Windows (not inside Docker) and keep Docker's memory
+  limit modest, so Postgres, Docker and the model fit in 16 GB together.
 - **Zero-cost rule (no paid APIs or services):** nothing in this roadmap may cost money.
   - **Models run locally with Ollama** (free, open-source): a small chat model and a local embedding model, chosen
     to fit my PC's RAM. Each guide says which model and why, and what to do if it's too slow.
@@ -133,7 +137,7 @@ Don't push the whole plan back.
 | ⬜ | Tue Nov 17 | Guardrails and prompt-injection lab: poison notes and tool results, watch CourseMate misbehave, add defenses and output validation, one test per attack | Python | AI security: injection, data leaks, tool misuse | safe handling of untrusted content (plan mode + deny rules) | |
 | ⬜ | Wed Nov 18 | Payments ledger API: double-entry ledger, idempotency keys, Postgres | Go | payment correctness, exactly-once transfers | **MCP server** (connect Claude Code to Postgres) | |
 | ⬜ | Thu Nov 19 | Forward-deployed sprint: a "customer" hands me a messy invoice CSV and a half-documented API; clean it, load it into my ledger, LLM categorizes line items with evals, deployment note for their team | Python + Go | data cleaning, integration, AI in a real workflow, customer communication | **have Claude interview me** about requirements before it plans | |
-| ⬜ | Fri Nov 20 | Ship CourseMate: one-command deploy with Terraform (local Docker provider): app + Postgres + Ollama containers, secrets out of code, health check, eval gate in CI before a release; plus a short doc on how the same setup maps to a real cloud | Terraform + Docker | IaC, deployment, CI/CD for LLM apps | **headless `claude -p` in CI** (review a `terraform plan`) | |
+| ⬜ | Fri Nov 20 | Ship CourseMate: one-command deploy with Terraform (local Docker provider): app + Postgres containers talking to Ollama on the host, secrets out of code, health check, eval gate in CI before a release; plus a short doc on how the same setup maps to a real cloud | Terraform + Docker | IaC, deployment, CI/CD for LLM apps | **headless `claude -p` in CI** (review a `terraform plan`) | |
 | ⬜ | Weekend Nov 21–22 | **AI capstone: CourseMate case study.** Polish, a recorded demo (it runs locally), an eval and latency report, architecture diagram, case-study README ("problem → design → results → what I'd do next"), 3-minute demo video | all | presenting an AI product end to end | **plugins**: package my kit for reuse | |
 
 ### Week 4 (Nov 23–29): Blockchain + fintech lane, interview prep (Thanksgiving week)
