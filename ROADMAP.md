@@ -1,18 +1,25 @@
-# Learning Roadmap: Blockchain + AI + Fintech Engineering with Claude Code
+# Learning Roadmap: AI Engineering (+ Blockchain and Fintech) with Claude Code
 
-**Goals:** become fluent in Claude Code, refresh blockchain development (Solidity, Go, TypeScript), and learn AI
-engineering (Python, LLM APIs, RAG, evals, agents, MCP). Build **one** public portfolio that tells one story:
-*an engineer who builds AI systems for fintech and blockchain.*
+**Goals:** get hired as an **AI engineer** (the biggest hiring market right now), stay ready for blockchain and fintech
+roles, and become fluent in Claude Code along the way.
 
-**Target roles (one portfolio, several resume versions):**
-- Blockchain / stablecoin engineering, e.g. Coinbase's *Senior Software Engineer, Stablecoins*
-- AI engineer / applied AI engineer (LLM apps, RAG, agents)
-- Forward deployed engineer / solutions engineer / DevRel (building with customers, teaching, writing)
-- Fintech backend (payments, ledgers, Go services)
+**Two lanes, one GitHub profile:**
+- **AI lane (main, about 70% of the sprint).** Python, LLM APIs, structured output, evals, RAG, agents, MCP,
+  guardrails, observability, deployment. **No blockchain in these projects**, so they stand on their own for any AI
+  employer. Running product: **CourseMate**, an AI teaching assistant over my own course materials (my real edge as
+  a professor), plus a customer-integration project for forward-deployed roles.
+- **Blockchain + fintech lane (about 30%).** Keep the strongest stablecoin skills sharp (signatures, vaults, security,
+  reserves) and the Go payments ledger, which also counts for general backend jobs.
 
-**Path:** Week 1 is done. A 3-week sprint (Nov 9–29, 2026) finishes the blockchain core, adds the Go fintech backend,
-then builds AI engineering on top of that same code (the indexer, ledger and reserve service become the data the AI
-tools use). The capstone joins all three. A daily job track runs alongside, so applications start on day one.
+**Target roles, in priority order:**
+1. AI engineer / applied AI engineer (LLM apps, RAG, agents)
+2. Forward deployed engineer / AI solutions engineer / AI DevRel or education (building with customers, teaching, writing)
+3. Fintech backend (Go, payments, ledgers)
+4. Blockchain / stablecoin engineering, e.g. Coinbase's *Senior Software Engineer, Stablecoins*
+
+**Path:** Week 1 (blockchain refresh) is done. A 3-week sprint (Nov 9–29, 2026): Week 2 builds AI foundations,
+Week 3 makes them production-grade and adds the Go ledger, Week 4 covers the blockchain lane and interview prep.
+A daily job track runs alongside, so applications start on day one.
 
 **Rhythm:** one project per weekday (about 1–1.5 hours), and a bigger one on weekends. Each project gets **its own GitHub repo** and **its own chat**.
 
@@ -48,6 +55,12 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
   Week 1 Weekend). Each guide tells me how to set a low monthly spend limit on the API account, uses the cheapest model
   that works, and says roughly what the project will cost. Tests must run **without** a key or network by default
   (mock or recorded responses); live calls go behind a flag or a separate test marker.
+- **AI lane rules:** no blockchain or crypto in AI-lane projects. Use my own course materials (slides, notes,
+  assignments I wrote; **never student data or grades**) or invented business data (support tickets, invoices,
+  product docs). Python with type hints, Pydantic for structured data, pytest, `ruff`. Prefer plain SDK calls first
+  so I understand what frameworks hide; introduce one framework (LangGraph or similar) only where a guide says so.
+  Every AI-lane `INTERVIEW.md` includes one **LLM system design** question (e.g. "design a RAG system for 10k
+  documents") with a model answer.
 - **Guide format:** write `GUIDE.md` for the project in the same format as
   [upgradeable-stablecoin/GUIDE.md](https://github.com/Syriacode/upgradeable-stablecoin/blob/main/GUIDE.md):
   every step has **Learn → Prompt (for Claude Code, in plan mode) → You check → Done when → Commit**.
@@ -62,8 +75,8 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 - **Repo:** one new public GitHub repo per project under Syriacode. Before Day 0, I create empty repos on github.com.
   After Day 0, my `/new-project` skill creates them.
 - **When I say "done":** review my repo (run its tests), give honest feedback, then update the **Progress** table in this
-  file in Mini-Blockchain and push. Also tell me which resume version (A, B or C in the Job track) the project belongs
-  in, and give me one resume line for it.
+  file in Mini-Blockchain and push. Also tell me which resume versions (A, B, C in the Job track) the project belongs
+  in, and give me one resume line for each.
 - **Job descriptions:** when I paste one, map its requirements to existing or new projects and add them to this roadmap.
 
 ---
@@ -89,55 +102,60 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 
 ## Sprint: 3 weeks to job-ready (Mon Nov 9 – Sun Nov 29, 2026)
 
-Remaining work squeezed into 18 projects. Weekdays stay **1–1.5 hours**; weekends are bigger. Every day also has a
-short **job task** (about 20–30 minutes, see the Job track below), so applying starts tomorrow, not after the sprint.
-If a day slips, skip to the next day's project and catch up on the weekend. Don't push the whole plan back.
+18 projects. Weekdays stay **1–1.5 hours**; weekends are bigger. Every day also has a short **job task** (about
+20–30 minutes, see the Job track below). If a day slips, skip to the next day's project and catch up on the weekend.
+Don't push the whole plan back.
 
-### Week 2 (Nov 9–15): Blockchain core
-
-| Status | When | Project | Lang | Concept | Claude Code technique | Repo |
-|---|---|---|---|---|---|---|
-| ⬜ | Mon Nov 9 | Merkle airdrop | Solidity + TS | Merkle proofs (rewards distribution) | Claude-written test-data scripts | |
-| ⬜ | Tue Nov 10 | Transfer event indexer into SQLite | Go | event logs, indexing, reorgs | **sessions**: `--continue`, `/resume` | |
-| ⬜ | Wed Nov 11 | Yield vault (ERC-4626) | Solidity | share accounting, rounding attacks | **context**: `/context`, `/compact`, `/clear` | |
-| ⬜ | Thu Nov 12 | Gasless approvals (EIP-2612 permit) | Solidity | signatures, EIP-712, replay protection | debugging: `-vvvv` traces, screenshots | |
-| ⬜ | Fri Nov 13 | Mini dApp front end for the token (local Anvil chain) | TypeScript | wallet connection, sending transactions | testing a web page with Claude in a browser | |
-| ⬜ | Weekend Nov 14–15 | **Security weekend:** break it, fix it (4 vulnerable contracts) + run Slither/Aderyn on all my contracts + one professional audit report (severity, impact, fix, test) | Solidity + Markdown | real attack types, automated auditing, audit process | **parallel sessions** (worktrees), `claude -p` | |
-
-### Week 3 (Nov 16–22): Fintech backend + first AI projects
+### Week 2 (Nov 9–15): AI foundations — CourseMate v1 (AI lane)
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Mon Nov 16 | Payments ledger API: double-entry ledger, idempotency keys, Postgres in docker-compose | Go + Docker | payment correctness, exactly-once transfers | **MCP server** (connect Claude Code to Postgres) | |
-| ⬜ | Tue Nov 17 | Stablecoin reserve service: watch mint/burn events, reconcile supply vs. reserves, alert on drift | Go | proof of reserves, reconciliation | **parallel subagents** (one per component) | |
-| ⬜ | Wed Nov 18 | Wallet explainer: CLI that asks an LLM to explain an address in plain English, using **tool use** to fetch balances and transfers | Python | LLM API basics: messages, system prompts, tool use, structured JSON output, tokens and cost | user-level `~/.claude/CLAUDE.md` + `/memory` | |
-| ⬜ | Thu Nov 19 | Evals for the wallet explainer: golden test set, exact-match checks, LLM-as-judge, score report | Python | evaluation, regressions | **notebook editing** (Jupyter) | |
-| ⬜ | Fri Nov 20 | Docs Q&A with RAG over EIPs and my course notes, with citations (Postgres + pgvector) | Python | embeddings, chunking, retrieval, grounding | choosing models and watching cost (`/model`, `/cost`) | |
-| ⬜ | Weekend Nov 21–22 | **Ledger MCP server + payments ops agent:** read-only MCP tools over my ledger; an agent investigates a failed payment and proposes a refund; **a human must approve any money movement**; evals | Python | MCP, agent loops, guardrails, human-in-the-loop | **build your own MCP server** (`claude mcp add`) + Claude Agent SDK | |
+| ⬜ | Mon Nov 9 | Question triage CLI: classify student/support questions (topic, urgency, needs-human) with an LLM; Pydantic schemas, retries, token and cost log | Python | LLM API basics: messages, system prompts, structured output, temperature, tokens and cost | user-level `~/.claude/CLAUDE.md` + `/memory` ("how to teach me Python and AI") | |
+| ⬜ | Tue Nov 10 | Evals for the triage CLI: 50-example golden set, accuracy per label, LLM-as-judge for explanations, eval gate in CI | Python | evaluation, regressions, "it looked right" isn't a test | Claude-written test-data scripts (generate and then hand-check the golden set) | |
+| ⬜ | Wed Nov 11 | CourseMate RAG: answer questions over my course notes with citations; chunking, embeddings, Postgres + pgvector in docker-compose; "I don't know" when not grounded | Python + Docker | embeddings, chunking, retrieval, grounding | choosing models and watching cost (`/model`, `/cost`) | |
+| ⬜ | Thu Nov 12 | Better retrieval: hybrid search (keyword + vector), reranking, retrieval evals (recall@k) comparing versions | Python | search quality, measuring retrieval | **notebook editing** (Jupyter): compare runs with Claude | |
+| ⬜ | Fri Nov 13 | CourseMate API + UI: FastAPI with streaming responses, a minimal chat web page, conversation history | Python + HTML/TS | serving LLM apps, streaming, sessions | testing a web page with Claude in a browser | |
+| ⬜ | Weekend Nov 14–15 | **CourseMate agent + MCP server:** tools to search notes, generate a quiz, draft an announcement; my own MCP server exposing the course tools; **a human approves anything that gets sent**; agent evals | Python | tool use, agent loops, MCP, human-in-the-loop | **build your own MCP server** (`claude mcp add`) + Claude Agent SDK | |
 
-### Week 4 (Nov 23–29): AI security, customers, shipping (Thanksgiving week)
+### Week 3 (Nov 16–22): Production AI + fintech backend
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Mon Nov 23 | Prompt-injection lab: attack my RAG app and ops agent with poisoned docs and transaction memos, add defenses, a test per attack | Python | AI security: injection, exfiltration, tool misuse | safe handling of untrusted content (plan mode + deny rules) | |
-| ⬜ | Tue Nov 24 | Forward-deployed sprint: a "customer" hands me a messy CSV and a half-documented API; integrate with my ledger, LLM categorizes transactions, deployment note for their team | Python + Go | data cleaning, integration, customer communication | **have Claude interview me** about requirements before it plans | |
-| ⬜ | Wed Nov 25 | Deploy the ops agent (or RAG app) to a cloud free tier with Terraform, secrets in a secret store, health check, logs | Terraform + Docker | IaC, cloud deployment, cost control | **headless `claude -p` in CI** (review a `terraform plan`) | |
-| — | Thu Nov 26 | Thanksgiving: no project. Job task only if I feel like it. | | | | |
-| ⬜ | Fri Nov 27 | Tokenized treasury fund: permissioned token (allowlist, transfer rules, NAV oracle) + 1-page client brief | Solidity + Markdown | tokenization, compliance controls | writing for executives with Claude | |
-| ⬜ | Weekend Nov 28–29 | **Capstone: AI-monitored stablecoin.** Stablecoin + reserve service (local chain, or Base Sepolia if the wallet is funded), the ops agent explains drift alerts and drafts an incident report, dApp front end; portfolio README; 3-minute demo video | all | end-to-end: blockchain + AI + fintech | **plugins**: package my kit for reuse | |
+| ⬜ | Mon Nov 16 | Observability for CourseMate: traces per request (prompt, retrieved chunks, tool calls), latency and cost per answer, a small dashboard; add caching | Python | LLMOps: tracing, cost and latency budgets, caching | **sessions**: `--continue`, `/resume` | |
+| ⬜ | Tue Nov 17 | Guardrails and prompt-injection lab: poison notes and tool results, watch CourseMate misbehave, add defenses and output validation, one test per attack | Python | AI security: injection, data leaks, tool misuse | safe handling of untrusted content (plan mode + deny rules) | |
+| ⬜ | Wed Nov 18 | Payments ledger API: double-entry ledger, idempotency keys, Postgres | Go | payment correctness, exactly-once transfers | **MCP server** (connect Claude Code to Postgres) | |
+| ⬜ | Thu Nov 19 | Forward-deployed sprint: a "customer" hands me a messy invoice CSV and a half-documented API; clean it, load it into my ledger, LLM categorizes line items with evals, deployment note for their team | Python + Go | data cleaning, integration, AI in a real workflow, customer communication | **have Claude interview me** about requirements before it plans | |
+| ⬜ | Fri Nov 20 | Ship CourseMate: deploy to a cloud free tier with Terraform, secrets in a secret store, health check, eval gate before deploy in CI | Terraform + Docker | IaC, deployment, CI/CD for LLM apps | **headless `claude -p` in CI** (review a `terraform plan`) | |
+| ⬜ | Weekend Nov 21–22 | **AI capstone: CourseMate case study.** Polish, a live demo link, an eval and cost report, architecture diagram, case-study README ("problem → design → results → what I'd do next"), 3-minute demo video | all | presenting an AI product end to end | **plugins**: package my kit for reuse | |
 
-> **Note (Week 1 Weekend):** PlayToken was not deployed to Base Sepolia (faucet/funding trouble). The Fri Nov 13 dApp
-> uses a local Anvil chain. If I want the capstone live on Base Sepolia, fund a test wallet before Nov 28; otherwise the
-> capstone runs locally and the demo video shows it.
+### Week 4 (Nov 23–29): Blockchain + fintech lane, interview prep (Thanksgiving week)
+
+| Status | When | Project | Lang | Concept | Claude Code technique | Repo |
+|---|---|---|---|---|---|---|
+| ⬜ | Mon Nov 23 | Gasless approvals (EIP-2612 permit) | Solidity | signatures, EIP-712, replay protection | debugging: `-vvvv` traces, screenshots | |
+| ⬜ | Tue Nov 24 | Yield vault (ERC-4626) | Solidity | share accounting, rounding attacks | **context**: `/context`, `/compact`, `/clear` | |
+| ⬜ | Wed Nov 25 | Stablecoin reserve service: watch mint/burn events, reconcile supply vs. reserves, alert on drift | Go | proof of reserves, reconciliation | **parallel subagents** (one per component) | |
+| — | Thu Nov 26 | Thanksgiving: no project. | | | | |
+| ⬜ | Fri Nov 27 | Security day: break it, fix it (2 vulnerable contracts) + Slither/Aderyn on all my contracts + a short audit report | Solidity + Markdown | real attack types, automated auditing | **parallel sessions** (worktrees), `claude -p` | |
+| ⬜ | Weekend Nov 28–29 | **Bridge project:** stablecoin ops agent. Reuse the Week 2 agent pattern: it reads the reserve service and ledger, explains drift alerts, drafts an incident report, human approves. Short demo video. Then a **mock interview loop** (see Job track). | Python + Go | applying the AI lane to fintech/blockchain | custom subagent as an **interviewer** that grills me on my repos | |
+
+> **Note (Week 1 Weekend):** PlayToken was not deployed to Base Sepolia. Nothing in the sprint needs Base Sepolia now;
+> the Week 4 projects run on a local Anvil chain.
 
 ### Optional (after the sprint, only when a real job description asks for it)
 
-| Status | Project | Lang | Concept | Claude Code technique | Repo |
-|---|---|---|---|---|---|
-| ⬜ | Transaction signer service: EIP-155/EIP-1559 signing, keystore, signing policy rules | Go | key management, custody, nonce handling | extended thinking for design reviews | |
-| ⬜ | Multi-brand stablecoin factory (CREATE2 clones of the upgradeable stablecoin) | Solidity | factories, minimal proxies | GitHub Actions with `@claude` PR reviews | |
-| ⬜ | Rust intro: Merkle tree crate with proofs and tests | Rust | Merkle trees, Rust ownership | reuse the "teach me" section of `~/.claude/CLAUDE.md` | |
-| ⬜ | Fund-flow tracer: follow funds N hops, graph + findings report with an LLM summary | Python | blockchain forensics | notebook editing (Jupyter) | |
+| Status | Project | Lang | Concept | Repo |
+|---|---|---|---|---|
+| ⬜ | Fine-tune a small open model (LoRA) on question-triage data and compare it with prompting, using the Week 2 evals | Python | fine-tuning vs. prompting, cost/quality trade-offs | |
+| ⬜ | Multi-agent workflow with a framework (LangGraph or similar) | Python | orchestration, state, retries | |
+| ⬜ | Merkle airdrop | Solidity + TS | Merkle proofs | |
+| ⬜ | Reserve service, Transfer event indexer (optional) | Go | event logs, indexing, reorgs | |
+| ⬜ | Mini dApp front end | TypeScript | wallet connection | |
+| ⬜ | Tokenized treasury fund + client brief | Solidity + Markdown | tokenization, compliance | |
+| ⬜ | Transaction signer service | Go | key management, custody | |
+| ⬜ | Multi-brand stablecoin factory | Solidity | CREATE2, minimal proxies | |
+| ⬜ | Rust Merkle crate | Rust | Rust ownership | |
+| ⬜ | Fund-flow tracer | Python | blockchain forensics | |
 
 ---
 
@@ -145,20 +163,26 @@ If a day slips, skip to the next day's project and catch up on the weekend. Don'
 
 Work happens in my private repo **Syriacode/job-search**. Golden rule: apply only to companies I can verify are real
 and have a history. Salary floor: $150k. Phoenix on-site/hybrid, remote, or relocation for the right employer.
+Aim for about **70% AI applications, 30% blockchain/fintech**.
+
+**Resume versions:**
+- **(A) AI engineer / applied AI / forward deployed** — AI lane projects and the Go ledger. **No blockchain on it.**
+- **(B) AI solutions / DevRel / AI education** — the same AI projects, led by teaching, curriculum design, talks and writing.
+- **(C) Blockchain + fintech backend** — Week 1, Week 4, the ledger, plus one line on AI work.
 
 | Status | When | Job task |
 |---|---|---|
-| ⬜ | Week 2 Mon–Tue | Three resume versions from my ✅ projects + teaching record: **(A) Blockchain / stablecoin**, **(B) AI engineer / forward deployed / solutions / DevRel**, **(C) Fintech backend (Go)**. Each line says what I built and links the repo. |
-| ⬜ | Week 2 Wed | GitHub profile README: one-paragraph story ("I build AI systems for fintech and blockchain"), pin my 6 best repos. LinkedIn headline, About, and Featured to match. |
+| ⬜ | Week 2 Mon–Tue | Draft resumes A, B and C from what's ✅ now and the teaching record. A and B fill in as the week goes. |
+| ⬜ | Week 2 Wed | GitHub profile README and LinkedIn (headline, About, Featured) aimed at **AI engineering first**; pin AI repos as they land. |
 | ⬜ | Week 2 Thu | Visa prep: ask my immigration attorney whether I'm counted against the H-1B cap and how long a transfer takes. Write a two-line answer for "Do you need sponsorship?" |
-| ⬜ | Week 2 Fri–Sun | Build a target list of 30 verified companies across the four role types; send the **first 5 applications**. |
-| ⬜ | Week 3 (daily) | **1 application a day** (tailored resume version + short note linking 2 relevant repos). Add the new Go and AI projects to resumes B and C as each one is ✅. |
-| ⬜ | Week 3 Weekend | Interview practice: my `INTERVIEW.md` files (out loud, timed), one system design (payments ledger), 5 STAR stories from teaching and projects. |
-| ⬜ | Week 4 (daily) | **1–2 applications a day**, follow up on Week 2 applications, reach out to 1 person a day at target companies (alumni, ex-students, conference contacts). |
-| ⬜ | Week 4 Weekend | Publish the capstone demo video and a LinkedIn post; turn one `GUIDE.md` into a public tutorial (DevRel writing sample). |
+| ⬜ | Week 2 Fri–Sun | Target list of 40 verified companies (AI startups, enterprises building AI, AI platform companies, EdTech, fintech, a few crypto). Send the **first 5 applications**. |
+| ⬜ | Week 3 (daily) | **1–2 applications a day** + **30 minutes of Python coding practice** (arrays, hashing, two pointers, BFS/DFS: AI engineer loops still include a coding round). |
+| ⬜ | Week 3 Weekend | Publish the CourseMate demo video + a LinkedIn post. Practice 2 **LLM system design** questions out loud (from my `INTERVIEW.md` files). |
+| ⬜ | Week 4 (daily) | **1–2 applications a day**, follow up on Week 2 ones, reach out to 1 person a day at target companies (alumni, ex-students, conference contacts). |
+| ⬜ | Week 4 Weekend | Mock interview loop: one coding round, one LLM system design, one behavioral (5 STAR stories), one "walk me through your repo". Turn one `GUIDE.md` into a public tutorial (DevRel writing sample). |
 
-**Sprint target by Nov 29:** 3 resume versions, a pinned portfolio with a capstone video, about 25–35 tailored
-applications sent, and practiced answers for the interview questions in every `INTERVIEW.md`.
+**Sprint target by Nov 29:** resume A that reads as a real AI engineer, a live CourseMate demo with evals and a case
+study, about 30–40 tailored applications sent, and a practiced interview loop.
 
 ---
 
@@ -168,29 +192,31 @@ Added from job descriptions on 2026-11-02. When a project is ✅, add it to the 
 
 | Requirement in job posts | Where it shows up | Proved by |
 |---|---|---|
-| Solidity / EVM smart contracts in production; upgradeability, access control | Coinbase Stablecoins, Chainlink, FTI | Upgradeable stablecoin ✅, ETH Vault ✅, Multisig ✅, Timelock ✅, Permit, Factory (optional) |
-| Onchain security, audits, key management | Coinbase Stablecoins, Chainlink, Anchorage | Security weekend (break it/fix it, Slither, audit report), Signer service (optional) |
-| Go backend services, distributed systems | Coinbase (Stablecoins, Payments, Blockchain Network, Data Foundations), Anchorage, Robinhood | Chain reader ✅, Indexer, Payments ledger, Reserve service, Signer service (optional) |
+| Solidity / EVM smart contracts in production; upgradeability, access control | Coinbase Stablecoins, Chainlink, FTI | Upgradeable stablecoin ✅, ETH Vault ✅, Multisig ✅, Timelock ✅, Permit, ERC-4626 vault |
+| Onchain security, audits, key management | Coinbase Stablecoins, Chainlink, Anchorage | Security day (break it/fix it, Slither, audit report), Signer service (optional) |
+| Go backend services, distributed systems | Coinbase (Stablecoins, Payments, Blockchain Network, Data Foundations), Anchorage, Robinhood | Chain reader ✅, Payments ledger, Reserve service, Indexer (optional) |
 | Payments correctness (ledgers, idempotency) | Coinbase Payments Platform, Mastercard | Payments ledger API |
-| Infrastructure as Code (Terraform), Docker, cloud | Coinbase Data Foundations, Anchorage | Payments ledger (docker-compose), Cloud deploy with Terraform |
-| Indexing onchain data, event logs, reorgs | Coinbase Data Foundations / Blockchain Network | Transfer event indexer |
-| Python / TypeScript, APIs, explaining tech to customers | Alchemy Solutions, PwC | Token balance script, dApp front end, Tokenized fund brief, teaching record |
+| Infrastructure as Code (Terraform), Docker, cloud | Coinbase Data Foundations, Anchorage | Ship CourseMate (Terraform + Docker), Payments ledger |
+| Indexing onchain data, event logs, reorgs | Coinbase Data Foundations / Blockchain Network | Reserve service, Transfer event indexer (optional) |
+| Python / TypeScript, APIs, explaining tech to customers | Alchemy Solutions, PwC | Token balance script, Forward-deployed sprint, teaching record |
 | Rust, cryptography | Chainlink Product Security | Rust Merkle crate (optional), Permit (EIP-712 signatures) |
-| Blockchain forensics, fund-flow tracing, client reports | FTI Consulting | Fund-flow tracer (optional), Security weekend audit report |
-| Tokenization, custody, stablecoin strategy | PwC, Coinbase Stablecoins, Anchorage | Upgradeable stablecoin ✅, Reserve service, Tokenized fund |
+| Blockchain forensics, fund-flow tracing, client reports | FTI Consulting | Fund-flow tracer (optional), Security day audit report |
+| Tokenization, custody, stablecoin strategy | PwC, Coinbase Stablecoins, Anchorage | Upgradeable stablecoin ✅, Reserve service, Stablecoin ops agent, Tokenized fund (optional) |
 
 **AI engineering rows** (added 2026-11-08 from general market research; fill in "Where it shows up" when I paste real
-AI engineer or forward deployed engineer job descriptions):
+AI engineer or forward deployed engineer job descriptions). None of these depend on blockchain:
 
 | Requirement in job posts | Where it shows up | Proved by |
 |---|---|---|
-| Python, LLM APIs, tool use / function calling, structured output | AI engineer posts | Wallet explainer |
-| Evaluation of LLM systems | AI engineer posts | Wallet explainer evals, ops agent evals |
-| RAG, embeddings, vector databases | AI engineer posts | Docs Q&A with RAG |
-| Agents, MCP, integrating AI with internal systems | AI engineer / FDE posts | Ledger MCP server, Payments ops agent |
-| AI security (prompt injection, guardrails) | AI engineer / security posts | Prompt-injection lab, ops agent approvals |
-| Working with customers: messy data, integrations, docs | FDE / solutions engineer posts | Forward-deployed sprint, Tokenized fund brief, teaching record |
-| Deploying and running AI services in the cloud | AI engineer / FDE posts | Cloud deploy with Terraform |
+| Python, LLM APIs, structured output, tool use | AI engineer posts | Question triage CLI, CourseMate agent |
+| Evaluation of LLM systems | AI engineer posts | Triage evals, retrieval evals (recall@k), agent evals, CI eval gate |
+| RAG, embeddings, vector databases, search quality | AI engineer posts | CourseMate RAG, Better retrieval |
+| Serving LLM apps (APIs, streaming) | AI engineer posts | CourseMate API + UI |
+| Agents, MCP, integrating AI with internal systems | AI engineer / FDE posts | CourseMate agent + MCP server |
+| AI security (prompt injection, guardrails) | AI engineer / security posts | Guardrails and prompt-injection lab |
+| LLMOps: tracing, cost, latency, caching | AI engineer posts | Observability for CourseMate |
+| Working with customers: messy data, integrations, docs | FDE / solutions engineer posts | Forward-deployed sprint, teaching record |
+| Deploying AI services in the cloud, CI/CD | AI engineer / FDE posts | Ship CourseMate (Terraform + CI) |
 | Agentic coding tools (Claude Code) | AI engineer / developer tools posts | every project's "How I used Claude Code" section |
 
 ---
