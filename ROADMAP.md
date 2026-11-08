@@ -51,10 +51,18 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 - **My setup:** Windows with Git Bash; Claude Code in the terminal; Foundry installed; GitHub user **Syriacode**.
   (From Day 0 on: GitHub CLI `gh` and my `/new-project` skill.) For AI projects (Week 4 on): Python 3 with a virtual
   environment, and an LLM API key.
-- **AI projects and API keys:** the key lives in `.env`, which is git-ignored and denied to Claude Code (same rule as
-  Week 1 Weekend). Each guide tells me how to set a low monthly spend limit on the API account, uses the cheapest model
-  that works, and says roughly what the project will cost. Tests must run **without** a key or network by default
-  (mock or recorded responses); live calls go behind a flag or a separate test marker.
+- **Zero-cost rule (no paid APIs or services):** nothing in this roadmap may cost money.
+  - **Models run locally with Ollama** (free, open-source): a small chat model and a local embedding model, chosen
+    to fit my PC's RAM. Each guide says which model and why, and what to do if it's too slow.
+  - **Code is provider-agnostic:** one small `llm.py` interface with a local Ollama backend. Swapping to a hosted API
+    later must be a config change, not a rewrite (interviewers will ask about hosted APIs, so the guide explains the
+    differences).
+  - Optional only: a hosted free tier (e.g. Google's Gemini API free tier) that needs **no billing account or credit
+    card**. Never put my course materials in a free tier that trains on inputs unless I say so.
+  - **Free building blocks only:** Docker, Postgres + pgvector, FastAPI, GitHub Actions on public repos, Terraform with
+    the local Docker provider. No cloud account that asks for a credit card.
+  - Tests run **without** a model or network by default (mock or recorded responses); live model calls go behind a
+    separate test marker. Any secrets still live in `.env`, git-ignored and denied to Claude Code.
 - **AI lane rules:** no blockchain or crypto in AI-lane projects. Use my own course materials (slides, notes,
   assignments I wrote; **never student data or grades**) or invented business data (support tickets, invoices,
   product docs). Python with type hints, Pydantic for structured data, pytest, `ruff`. Prefer plain SDK calls first
@@ -125,8 +133,8 @@ Don't push the whole plan back.
 | ⬜ | Tue Nov 17 | Guardrails and prompt-injection lab: poison notes and tool results, watch CourseMate misbehave, add defenses and output validation, one test per attack | Python | AI security: injection, data leaks, tool misuse | safe handling of untrusted content (plan mode + deny rules) | |
 | ⬜ | Wed Nov 18 | Payments ledger API: double-entry ledger, idempotency keys, Postgres | Go | payment correctness, exactly-once transfers | **MCP server** (connect Claude Code to Postgres) | |
 | ⬜ | Thu Nov 19 | Forward-deployed sprint: a "customer" hands me a messy invoice CSV and a half-documented API; clean it, load it into my ledger, LLM categorizes line items with evals, deployment note for their team | Python + Go | data cleaning, integration, AI in a real workflow, customer communication | **have Claude interview me** about requirements before it plans | |
-| ⬜ | Fri Nov 20 | Ship CourseMate: deploy to a cloud free tier with Terraform, secrets in a secret store, health check, eval gate before deploy in CI | Terraform + Docker | IaC, deployment, CI/CD for LLM apps | **headless `claude -p` in CI** (review a `terraform plan`) | |
-| ⬜ | Weekend Nov 21–22 | **AI capstone: CourseMate case study.** Polish, a live demo link, an eval and cost report, architecture diagram, case-study README ("problem → design → results → what I'd do next"), 3-minute demo video | all | presenting an AI product end to end | **plugins**: package my kit for reuse | |
+| ⬜ | Fri Nov 20 | Ship CourseMate: one-command deploy with Terraform (local Docker provider): app + Postgres + Ollama containers, secrets out of code, health check, eval gate in CI before a release; plus a short doc on how the same setup maps to a real cloud | Terraform + Docker | IaC, deployment, CI/CD for LLM apps | **headless `claude -p` in CI** (review a `terraform plan`) | |
+| ⬜ | Weekend Nov 21–22 | **AI capstone: CourseMate case study.** Polish, a recorded demo (it runs locally), an eval and latency report, architecture diagram, case-study README ("problem → design → results → what I'd do next"), 3-minute demo video | all | presenting an AI product end to end | **plugins**: package my kit for reuse | |
 
 ### Week 4 (Nov 23–29): Blockchain + fintech lane, interview prep (Thanksgiving week)
 
@@ -146,7 +154,7 @@ Don't push the whole plan back.
 
 | Status | Project | Lang | Concept | Repo |
 |---|---|---|---|---|
-| ⬜ | Fine-tune a small open model (LoRA) on question-triage data and compare it with prompting, using the Week 2 evals | Python | fine-tuning vs. prompting, cost/quality trade-offs | |
+| ⬜ | Fine-tune a small open model (LoRA) on question-triage data and compare it with prompting, using the Week 2 evals | Python | fine-tuning vs. prompting, cost/quality trade-offs (free with a Google Colab GPU, if available) | |
 | ⬜ | Multi-agent workflow with a framework (LangGraph or similar) | Python | orchestration, state, retries | |
 | ⬜ | Merkle airdrop | Solidity + TS | Merkle proofs | |
 | ⬜ | Reserve service, Transfer event indexer (optional) | Go | event logs, indexing, reorgs | |
@@ -181,7 +189,7 @@ Aim for about **70% AI applications, 30% blockchain/fintech**.
 | ⬜ | Week 4 (daily) | **1–2 applications a day**, follow up on Week 2 ones, reach out to 1 person a day at target companies (alumni, ex-students, conference contacts). |
 | ⬜ | Week 4 Weekend | Mock interview loop: one coding round, one LLM system design, one behavioral (5 STAR stories), one "walk me through your repo". Turn one `GUIDE.md` into a public tutorial (DevRel writing sample). |
 
-**Sprint target by Nov 29:** resume A that reads as a real AI engineer, a live CourseMate demo with evals and a case
+**Sprint target by Nov 29:** resume A that reads as a real AI engineer, a recorded CourseMate demo with evals and a case
 study, about 30–40 tailored applications sent, and a practiced interview loop.
 
 ---
@@ -216,7 +224,7 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
 | AI security (prompt injection, guardrails) | AI engineer / security posts | Guardrails and prompt-injection lab |
 | LLMOps: tracing, cost, latency, caching | AI engineer posts | Observability for CourseMate |
 | Working with customers: messy data, integrations, docs | FDE / solutions engineer posts | Forward-deployed sprint, teaching record |
-| Deploying AI services in the cloud, CI/CD | AI engineer / FDE posts | Ship CourseMate (Terraform + CI) |
+| Deploying AI services, CI/CD | AI engineer / FDE posts | Ship CourseMate (Terraform + Docker + CI eval gate) |
 | Agentic coding tools (Claude Code) | AI engineer / developer tools posts | every project's "How I used Claude Code" section |
 
 ---
