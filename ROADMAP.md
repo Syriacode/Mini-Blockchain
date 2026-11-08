@@ -67,7 +67,7 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 | ✅ | Wed | Chain reader CLI: latest block, balances | Go | RPC, blocks, go-ethereum | learning a new language with Claude | [chain-reader-cli](https://github.com/Syriacode/chain-reader-cli) |
 | ✅ | Thu | Timelock: delayed admin actions | Solidity | governance, time-based security | **custom subagent** (security reviewer) | [timelock](https://github.com/Syriacode/timelock) |
 | ✅ | Fri | Token balance script | TypeScript | ERC-20 reads, events, viem | **hooks** (auto-format on edit) | [token-balance-script](https://github.com/Syriacode/token-balance-script) |
-| ⬜ | Weekend | Deploy and verify a token on Base Sepolia | Solidity | test wallets, faucets, Basescan verification | secrets safety (deny `.env`), `/code-review` | |
+| ✅ | Weekend | Deploy and verify a token on Base Sepolia (built, tested and reviewed; live deploy skipped, see note) | Solidity | test wallets, faucets, Basescan verification | secrets safety (deny `.env`), `/code-review` | [base-sepolia-token](https://github.com/Syriacode/base-sepolia-token) |
 
 ### Week 2: Stablecoin-adjacent building blocks
 
@@ -79,6 +79,10 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 | ⬜ | Thu | Gasless approvals (EIP-2612 permit) | Solidity | signatures, EIP-712, replay protection | debugging: `-vvvv` traces, screenshots | |
 | ⬜ | Fri | Mini dApp front end for the testnet token | TypeScript | wallet connection, sending transactions | testing a web page with Claude in a browser | |
 | ⬜ | Weekend | Break it, fix it: 4 vulnerable contracts | Solidity | real attack types and fixes | **parallel sessions** (worktrees), `claude -p` | |
+
+> **Note (Week 1 Weekend):** PlayToken was not deployed to Base Sepolia (faucet/funding trouble). Before the Week 2 Fri
+> dApp, either finish Steps 8–9 of `base-sepolia-token/GUIDE.md` or have the dApp deploy PlayToken to a local Anvil
+> chain. The Week 4 capstone deploys to Base Sepolia, so a funded test wallet is needed by then.
 
 After Week 2: review what clicked before starting Week 3.
 
@@ -148,3 +152,8 @@ Added from job descriptions on 2026-11-02. When a project is ✅, add it to the 
     every time. Test a hook by piping JSON into it before you trust it, keep it fast and narrow, and exit 2 with a
     clear message when Claude needs to fix something. Hooks only see Claude's own tool calls, so the same check also
     belongs in CI. (Week 1 Fri)
+11. **Keep secrets out of Claude's reach by design, then use rules as a seatbelt.** A deny list is an enumeration, and
+    there's always another command, alias or script. Keep the valuable secret where Claude can't read it (an encrypted
+    keystore, a separate terminal for passwords), test deny rules with a canary, and scan git history in CI. Run
+    `/code-review` on a branch **before** an irreversible step, so it sees exactly what you're about to ship.
+    (Week 1 Weekend)
