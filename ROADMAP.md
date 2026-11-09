@@ -122,7 +122,7 @@ Don't push the whole plan back.
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Mon Nov 9 | Question triage CLI: classify student/support questions (topic, urgency, needs-human) with an LLM; Pydantic schemas, retries, token and cost log | Python | LLM API basics: messages, system prompts, structured output, temperature, tokens and cost | user-level `~/.claude/CLAUDE.md` + `/memory` ("how to teach me Python and AI") | |
+| ✅ | Mon Nov 9 | Question triage CLI: classify student/support questions (topic, urgency, needs-human) with an LLM; Pydantic schemas, retries, token and cost log | Python | LLM API basics: messages, system prompts, structured output, temperature, tokens and cost | user-level `~/.claude/CLAUDE.md` + `/memory` ("how to teach me Python and AI") | [question-triage](https://github.com/Syriacode/question-triage) |
 | ⬜ | Tue Nov 10 | Evals for the triage CLI: 50-example golden set, accuracy per label, LLM-as-judge for explanations, eval gate in CI | Python | evaluation, regressions, "it looked right" isn't a test | Claude-written test-data scripts (generate and then hand-check the golden set) | |
 | ⬜ | Wed Nov 11 | CourseMate RAG: answer questions over my course notes with citations; chunking, embeddings, Postgres + pgvector in docker-compose; "I don't know" when not grounded | Python + Docker | embeddings, chunking, retrieval, grounding | choosing models and watching cost (`/model`, `/cost`) | |
 | ⬜ | Thu Nov 12 | Better retrieval: hybrid search (keyword + vector), reranking, retrieval evals (recall@k) comparing versions | Python | search quality, measuring retrieval | **notebook editing** (Jupyter): compare runs with Claude | |
@@ -220,7 +220,7 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
 
 | Requirement in job posts | Where it shows up | Proved by |
 |---|---|---|
-| Python, LLM APIs, structured output, tool use | AI engineer posts | Question triage CLI, CourseMate agent |
+| Python, LLM APIs, structured output, tool use | AI engineer posts | Question triage CLI ✅, CourseMate agent |
 | Evaluation of LLM systems | AI engineer posts | Triage evals, retrieval evals (recall@k), agent evals, CI eval gate |
 | RAG, embeddings, vector databases, search quality | AI engineer posts | CourseMate RAG, Better retrieval |
 | Serving LLM apps (APIs, streaming) | AI engineer posts | CourseMate API + UI |
@@ -261,3 +261,7 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
     keystore, a separate terminal for passwords), test deny rules with a canary, and scan git history in CI. Run
     `/code-review` on a branch **before** an irreversible step, so it sees exactly what you're about to ship.
     (Week 1 Weekend)
+12. **Put who you are in user memory, and what the repo needs in project memory.** `~/.claude/CLAUDE.md` follows you
+    into every project; each repo's `CLAUDE.md` stays short and true for anyone who clones it. When Claude behaves
+    oddly, run `/memory` first to see which files shaped the session. Run `git branch` before your first push, so
+    your work lands on `main`. (Week 2 Mon)
