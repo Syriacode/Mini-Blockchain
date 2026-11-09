@@ -77,11 +77,16 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
   [upgradeable-stablecoin/GUIDE.md](https://github.com/Syriacode/upgradeable-stablecoin/blob/main/GUIDE.md):
   every step has **Learn → Prompt (for Claude Code, in plan mode) → You check → Done when → Commit**.
   Very low-level steps: exact commands, exact words to type, and what I should see.
+- **Every guide starts with a Project overview**, before Step 0, that I can read on its own: what the project is
+  about and why it matters; what we'll build (the parts and how they fit, with a small diagram); how we'll test it;
+  a short definition of every new tool, technology or term used; and, when the project builds on an earlier one,
+  a plain-language recap of what that earlier project built.
 - **Size:** a weekday project must fit in **1–1.5 hours**. Weekend projects can be longer.
 - **Verify before handing over:** build and test a reference solution privately so every command in the guide works.
   Don't push the solution. I write the code with Claude Code myself.
-- **Every project repo must include:** the code, tests, a CI workflow, `README.md` (with a "How I used Claude Code" section
-  that I write myself), and **`INTERVIEW.md` with 5 interview questions and model answers**.
+- **Every project repo must include:** the code, tests, a CI workflow, `README.md` (run commands, design decisions,
+  known limitations; no "How I used Claude Code" section), and **`INTERVIEW.md` with 5 interview questions and
+  model answers**.
 - **One Claude Code technique per project** (listed in the tables below). Teach it inside the guide, and end the guide
   with a **"Level up"** tip for using Claude Code more fluently.
 - **Repo:** one new public GitHub repo per project under Syriacode. Before Day 0, I create empty repos on github.com.
@@ -229,7 +234,7 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
 | LLMOps: tracing, cost, latency, caching | AI engineer posts | Observability for CourseMate |
 | Working with customers: messy data, integrations, docs | FDE / solutions engineer posts | Forward-deployed sprint, teaching record |
 | Deploying AI services, CI/CD | AI engineer / FDE posts | Ship CourseMate (Terraform + Docker + CI eval gate) |
-| Agentic coding tools (Claude Code) | AI engineer / developer tools posts | every project's "How I used Claude Code" section |
+| Agentic coding tools (Claude Code) | AI engineer / developer tools posts | every project's Claude Code technique (Progress tables) and `GUIDE.md` |
 
 ---
 
