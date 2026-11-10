@@ -128,7 +128,7 @@ Don't push the whole plan back.
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
 | ✅ | Mon Nov 9 | Question triage CLI: classify student/support questions (topic, urgency, needs-human) with an LLM; Pydantic schemas, retries, token and cost log | Python | LLM API basics: messages, system prompts, structured output, temperature, tokens and cost | user-level `~/.claude/CLAUDE.md` + `/memory` ("how to teach me Python and AI") | [question-triage](https://github.com/Syriacode/question-triage) |
-| ⬜ | Tue Nov 10 | Evals for the triage CLI: 50-example golden set, accuracy per label, LLM-as-judge for explanations, eval gate in CI | Python | evaluation, regressions, "it looked right" isn't a test | Claude-written test-data scripts (generate and then hand-check the golden set) | |
+| ✅ | Tue Nov 10 | Evals for the triage CLI: 50-example golden set, accuracy per label, LLM-as-judge for explanations, eval gate in CI | Python | evaluation, regressions, "it looked right" isn't a test | Claude-written test-data scripts (generate and then hand-check the golden set) | [question-triage](https://github.com/Syriacode/question-triage) (`evals/`, PR #2) |
 | ⬜ | Wed Nov 11 | CourseMate RAG: answer questions over my course notes with citations; chunking, embeddings, Postgres + pgvector in docker-compose; "I don't know" when not grounded | Python + Docker | embeddings, chunking, retrieval, grounding | choosing models and watching cost (`/model`, `/cost`) | |
 | ⬜ | Thu Nov 12 | Better retrieval: hybrid search (keyword + vector), reranking, retrieval evals (recall@k) comparing versions | Python | search quality, measuring retrieval | **notebook editing** (Jupyter): compare runs with Claude | |
 | ⬜ | Fri Nov 13 | CourseMate API + UI: FastAPI with streaming responses, a minimal chat web page, conversation history | Python + HTML/TS | serving LLM apps, streaming, sessions | testing a web page with Claude in a browser | |
@@ -270,3 +270,7 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
     into every project; each repo's `CLAUDE.md` stays short and true for anyone who clones it. When Claude behaves
     oddly, run `/memory` first to see which files shaped the session. Run `git branch` before your first push, so
     your work lands on `main`. (Week 2 Mon)
+13. **Let Claude write the test data and its checker, but own the labels, and measure the judge before you trust it.**
+    Commit Claude's draft before you review it, so `git diff` shows what a human changed, and make the code refuse
+    unreviewed rows. An LLM judge is a model too: give it a balanced, hand-labelled calibration set (as many passes as
+    fails), read its reasons, and don't let a low threshold hide a judge that grades the wrong thing. (Week 2 Tue)
