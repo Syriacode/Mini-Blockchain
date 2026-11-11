@@ -129,7 +129,7 @@ Don't push the whole plan back.
 |---|---|---|---|---|---|---|
 | ✅ | Mon Nov 9 | Question triage CLI: classify student/support questions (topic, urgency, needs-human) with an LLM; Pydantic schemas, retries, token and cost log | Python | LLM API basics: messages, system prompts, structured output, temperature, tokens and cost | user-level `~/.claude/CLAUDE.md` + `/memory` ("how to teach me Python and AI") | [question-triage](https://github.com/Syriacode/question-triage) |
 | ✅ | Tue Nov 10 | Evals for the triage CLI: 50-example golden set, accuracy per label, LLM-as-judge for explanations, eval gate in CI | Python | evaluation, regressions, "it looked right" isn't a test | Claude-written test-data scripts (generate and then hand-check the golden set) | [question-triage](https://github.com/Syriacode/question-triage) (`evals/`, PR #2) |
-| ⬜ | Wed Nov 11 | CourseMate RAG: answer questions over my course notes with citations; chunking, embeddings, Postgres + pgvector in docker-compose; "I don't know" when not grounded | Python + Docker | embeddings, chunking, retrieval, grounding | choosing models and watching cost (`/model`, `/cost`) | |
+| ✅ | Wed Nov 11 | CourseMate RAG: answer questions over my course notes with citations; chunking, embeddings, Postgres + pgvector in docker-compose; "I don't know" when not grounded | Python + Docker | embeddings, chunking, retrieval, grounding | choosing models and watching cost (`/model`, `/cost`) || [coursemate](https://github.com/Syriacode/coursemate) |
 | ⬜ | Thu Nov 12 | Better retrieval: hybrid search (keyword + vector), reranking, retrieval evals (recall@k) comparing versions | Python | search quality, measuring retrieval | **notebook editing** (Jupyter): compare runs with Claude | |
 | ⬜ | Fri Nov 13 | CourseMate API + UI: FastAPI with streaming responses, a minimal chat web page, conversation history | Python + HTML/TS | serving LLM apps, streaming, sessions | testing a web page with Claude in a browser | |
 | ⬜ | Weekend Nov 14–15 | **CourseMate agent + MCP server:** tools to search notes, generate a quiz, draft an announcement; my own MCP server exposing the course tools; **a human approves anything that gets sent**; agent evals | Python | tool use, agent loops, MCP, human-in-the-loop | **build your own MCP server** (`claude mcp add`) + Claude Agent SDK | |
@@ -227,7 +227,7 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
 |---|---|---|
 | Python, LLM APIs, structured output, tool use | AI engineer posts | Question triage CLI ✅, CourseMate agent |
 | Evaluation of LLM systems | AI engineer posts | Triage evals, retrieval evals (recall@k), agent evals, CI eval gate |
-| RAG, embeddings, vector databases, search quality | AI engineer posts | CourseMate RAG, Better retrieval |
+| RAG, embeddings, vector databases, search quality | AI engineer posts | CourseMate RAG ✅, Better retrieval |
 | Serving LLM apps (APIs, streaming) | AI engineer posts | CourseMate API + UI |
 | Agents, MCP, integrating AI with internal systems | AI engineer / FDE posts | CourseMate agent + MCP server |
 | AI security (prompt injection, guardrails) | AI engineer / security posts | Guardrails and prompt-injection lab |
@@ -274,3 +274,8 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
     Commit Claude's draft before you review it, so `git diff` shows what a human changed, and make the code refuse
     unreviewed rows. An LLM judge is a model too: give it a balanced, hand-labelled calibration set (as many passes as
     fails), read its reasons, and don't let a low threshold hide a judge that grades the wrong thing. (Week 2 Tue)
+14. **Match the model to the job, and read the meter.** Plan with the strongest model and execute with a cheaper one
+    (`opusplan`), drop to Haiku for simple text, and switch at natural breaks, because each model keeps its own prompt
+    cache. Check `/usage` (or `/cost`) at the end of a session, not only when you hit a limit. The same rule applies
+    inside your own app: don't pay for a model call you don't need, keep prompts as small as the job allows, and use
+    the smallest model that passes your evals. (Week 2 Wed)
