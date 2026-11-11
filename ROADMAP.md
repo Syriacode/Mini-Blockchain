@@ -4,7 +4,7 @@
 roles, and become fluent in Claude Code along the way.
 
 **Two lanes, one GitHub profile:**
-- **AI lane (main, about 70% of the sprint).** Python, LLM APIs, structured output, evals, RAG, agents, MCP,
+- **AI lane (main, about 70% of the plan).** Python, LLM APIs, structured output, evals, RAG, agents, MCP,
   guardrails, observability, deployment. **No blockchain in these projects**, so they stand on their own for any AI
   employer. Running product: **CourseMate**, an AI teaching assistant over my own course materials (my real edge as
   a professor), plus a customer-integration project for forward-deployed roles.
@@ -17,11 +17,14 @@ roles, and become fluent in Claude Code along the way.
 3. Fintech backend (Go, payments, ledgers)
 4. Blockchain / stablecoin engineering, e.g. Coinbase's *Senior Software Engineer, Stablecoins*
 
-**Path:** Week 1 (blockchain refresh) is done. A 3-week sprint (Nov 9–29, 2026): Week 2 builds AI foundations,
-Week 3 makes them production-grade and adds the Go ledger, Week 4 covers the blockchain lane and interview prep.
-A daily job track runs alongside, so applications start on day one.
+**Path:** Week 1 (blockchain refresh) is done. Then (Nov 9 – Dec 15, 2026): AI foundations with two AI basics
+labs, production AI and the Go ledger, then the blockchain lane and interview prep. A job track runs alongside, so
+applications start now.
 
-**Rhythm:** one project per weekday (about 1–1.5 hours), and a bigger one on weekends. Each project gets **its own GitHub repo** and **its own chat**.
+**Rhythm (changed Nov 11):** **one project every other day**, about 1.5–2 hours. The day in between is a
+**reading day**: re-read the guide's overview, answer its "Check your understanding" questions without looking, and
+look up anything unclear. Quality over quantity. Each project gets **its own chat**, and usually its own GitHub repo
+(projects that improve CourseMate or the triage CLI happen on a branch of that repo).
 
 ---
 
@@ -49,8 +52,10 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
   AI engineering and fintech jobs. I'm a bit rusty on blockchain development, new to AI engineering, and still learning
   Claude Code. I'll look up anything I don't understand.
 - **My setup:** Windows with Git Bash; Claude Code in the terminal; Foundry installed; GitHub user **Syriacode**.
-  (From Day 0 on: GitHub CLI `gh` and my `/new-project` skill.) For AI projects (Week 4 on): Python 3 with a virtual
+  (From Day 0 on: GitHub CLI `gh` and my `/new-project` skill.) For AI projects: Python 3 with a virtual
   environment, and Ollama for local models.
+- **Python is `py` on my machine,** not `python`: guides write `py -m pytest`, `py -m pip install ...`, and
+  `!py -m pytest` inside Claude Code. CI on GitHub (Linux) keeps `python`.
 - **My PC (for model choices):** Intel i7-1260P, **16 GB RAM**, Intel Iris Xe integrated graphics (**no NVIDIA GPU**,
   so models run on the CPU), plenty of disk. Default to a **3B–4B chat model** plus a small local embedding model;
   7B–8B only as an optional comparison. Run Ollama natively on Windows (not inside Docker) and keep Docker's memory
@@ -77,11 +82,18 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
   [upgradeable-stablecoin/GUIDE.md](https://github.com/Syriacode/upgradeable-stablecoin/blob/main/GUIDE.md):
   every step has **Learn → Prompt (for Claude Code, in plan mode) → You check → Done when → Commit**.
   Very low-level steps: exact commands, exact words to type, and what I should see.
+- **I'm new to AI, so teach the basics first (added Nov 11).** In the overview, explain each AI idea with a tiny
+  example I can work out on paper (real numbers, a 2-D vector, a 3-chunk example), before any code. Each step adds
+  a **Predict** line (what to expect before running). Keep Claude Code prompts short: the goal and the rules, not a
+  full specification I can't follow. I hand-type the one or two small functions where the idea lives, and their
+  tests use the same numbers as the paper example. End every guide with **"Check your understanding"**: 5–7
+  questions with hidden answers, for the reading day.
 - **Every guide starts with a Project overview**, before Step 0, that I can read on its own: what the project is
   about and why it matters; what we'll build (the parts and how they fit, with a small diagram); how we'll test it;
   a short definition of every new tool, technology or term used; and, when the project builds on an earlier one,
   a plain-language recap of what that earlier project built.
-- **Size:** a weekday project must fit in **1–1.5 hours**. Weekend projects can be longer.
+- **Size:** a project fits in **about 1.5–2 hours** of hands-on time, with a natural place to stop halfway. One project
+  every other day.
 - **Verify before handing over:** build and test a reference solution privately so every command in the guide works.
   Don't push the solution. I write the code with Claude Code myself.
 - **Every project repo must include:** the code, tests, a CI workflow, `README.md` (run commands, design decisions,
@@ -117,52 +129,61 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 | ✅ | Fri | Token balance script | TypeScript | ERC-20 reads, events, viem | **hooks** (auto-format on edit) | [token-balance-script](https://github.com/Syriacode/token-balance-script) |
 | ✅ | Weekend | Deploy and verify a token on Base Sepolia (built, tested and reviewed; live deploy skipped, see note) | Solidity | test wallets, faucets, Basescan verification | secrets safety (deny `.env`), `/code-review` | [base-sepolia-token](https://github.com/Syriacode/base-sepolia-token) |
 
-## Sprint: 3 weeks to job-ready (Mon Nov 9 – Sun Nov 29, 2026)
+## Plan: Nov 9 – Dec 15, 2026, one project every other day
 
-18 projects. Weekdays stay **1–1.5 hours**; weekends are bigger. Every day also has a short **job task** (about
-20–30 minutes, see the Job track below). If a day slips, skip to the next day's project and catch up on the weekend.
-Don't push the whole plan back.
+Changed on Nov 11: the sprint was one project a day, which went too fast to understand the AI basics. Now there's a
+project every other day, a reading day in between, and two **AI basics labs** before the bigger AI projects.
+If a project slips, move everything after it; don't squeeze two into one day.
 
-### Week 2 (Nov 9–15): AI foundations — CourseMate v1 (AI lane)
+### Phase 1 (Nov 9–15): AI foundations — CourseMate v1 (AI lane)
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
 | ✅ | Mon Nov 9 | Question triage CLI: classify student/support questions (topic, urgency, needs-human) with an LLM; Pydantic schemas, retries, token and cost log | Python | LLM API basics: messages, system prompts, structured output, temperature, tokens and cost | user-level `~/.claude/CLAUDE.md` + `/memory` ("how to teach me Python and AI") | [question-triage](https://github.com/Syriacode/question-triage) |
 | ✅ | Tue Nov 10 | Evals for the triage CLI: 50-example golden set, accuracy per label, LLM-as-judge for explanations, eval gate in CI | Python | evaluation, regressions, "it looked right" isn't a test | Claude-written test-data scripts (generate and then hand-check the golden set) | [question-triage](https://github.com/Syriacode/question-triage) (`evals/`, PR #2) |
-| ✅ | Wed Nov 11 | CourseMate RAG: answer questions over my course notes with citations; chunking, embeddings, Postgres + pgvector in docker-compose; "I don't know" when not grounded | Python + Docker | embeddings, chunking, retrieval, grounding | choosing models and watching cost (`/model`, `/cost`) || [coursemate](https://github.com/Syriacode/coursemate) |
-| ⬜ | Thu Nov 12 | Better retrieval: hybrid search (keyword + vector), reranking, retrieval evals (recall@k) comparing versions | Python | search quality, measuring retrieval | **notebook editing** (Jupyter): compare runs with Claude | |
-| ⬜ | Fri Nov 13 | CourseMate API + UI: FastAPI with streaming responses, a minimal chat web page, conversation history | Python + HTML/TS | serving LLM apps, streaming, sessions | testing a web page with Claude in a browser | |
-| ⬜ | Weekend Nov 14–15 | **CourseMate agent + MCP server:** tools to search notes, generate a quiz, draft an announcement; my own MCP server exposing the course tools; **a human approves anything that gets sent**; agent evals | Python | tool use, agent loops, MCP, human-in-the-loop | **build your own MCP server** (`claude mcp add`) + Claude Agent SDK | |
+| ✅ | Wed Nov 11 | CourseMate RAG: answer questions over my course notes with citations; chunking, embeddings, Postgres + pgvector in docker-compose; "I don't know" when not grounded | Python + Docker | embeddings, chunking, retrieval, grounding | choosing models and watching cost (`/model`, `/cost`) | [coursemate](https://github.com/Syriacode/coursemate) |
+| ⬜ | Thu Nov 12 | Better retrieval: keyword search (BM25, by hand), vector search, hybrid (RRF), measured with recall@k and MRR on a reviewed golden set; CourseMate uses the winner. (Reranking moved to Optional.) | Python | search quality, measuring retrieval | **notebook editing** (Jupyter): compare runs with Claude | [coursemate](https://github.com/Syriacode/coursemate) (branch `retrieval`, `GUIDE-retrieval.md`) |
+| ⬜ | Sat Nov 14 | **AI basics lab 1: how an LLM works.** A notebook with small experiments on the local model: tokens and the tokenizer, next-token prediction, temperature (the same prompt 5 times at 0 and at 1), the context window and silent truncation (`num_ctx`), system vs. user messages, why models make things up | Python + Jupyter | tokens, sampling, context window, hallucination | **Claude as a tutor**: explain this, then quiz me | new repo `ai-basics` |
 
-### Week 3 (Nov 16–22): Production AI + fintech backend
-
-| Status | When | Project | Lang | Concept | Claude Code technique | Repo |
-|---|---|---|---|---|---|---|
-| ⬜ | Mon Nov 16 | Observability for CourseMate: traces per request (prompt, retrieved chunks, tool calls), latency and cost per answer, a small dashboard; add caching | Python | LLMOps: tracing, cost and latency budgets, caching | **sessions**: `--continue`, `/resume` | |
-| ⬜ | Tue Nov 17 | Guardrails and prompt-injection lab: poison notes and tool results, watch CourseMate misbehave, add defenses and output validation, one test per attack | Python | AI security: injection, data leaks, tool misuse | safe handling of untrusted content (plan mode + deny rules) | |
-| ⬜ | Wed Nov 18 | Payments ledger API: double-entry ledger, idempotency keys, Postgres | Go | payment correctness, exactly-once transfers | **MCP server** (connect Claude Code to Postgres) | |
-| ⬜ | Thu Nov 19 | Forward-deployed sprint: a "customer" hands me a messy invoice CSV and a half-documented API; clean it, load it into my ledger, LLM categorizes line items with evals, deployment note for their team | Python + Go | data cleaning, integration, AI in a real workflow, customer communication | **have Claude interview me** about requirements before it plans | |
-| ⬜ | Fri Nov 20 | Ship CourseMate: one-command deploy with Terraform (local Docker provider): app + Postgres containers talking to Ollama on the host, secrets out of code, health check, eval gate in CI before a release; plus a short doc on how the same setup maps to a real cloud | Terraform + Docker | IaC, deployment, CI/CD for LLM apps | **headless `claude -p` in CI** (review a `terraform plan`) | |
-| ⬜ | Weekend Nov 21–22 | **AI capstone: CourseMate case study.** Polish, a recorded demo (it runs locally), an eval and latency report, architecture diagram, case-study README ("problem → design → results → what I'd do next"), 3-minute demo video | all | presenting an AI product end to end | **plugins**: package my kit for reuse | |
-
-### Week 4 (Nov 23–29): Blockchain + fintech lane, interview prep (Thanksgiving week)
+### Phase 2 (Nov 16–22): CourseMate gets an app and an agent (AI lane)
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Mon Nov 23 | Gasless approvals (EIP-2612 permit) | Solidity | signatures, EIP-712, replay protection | debugging: `-vvvv` traces, screenshots | |
-| ⬜ | Tue Nov 24 | Yield vault (ERC-4626) | Solidity | share accounting, rounding attacks | **context**: `/context`, `/compact`, `/clear` | |
-| ⬜ | Wed Nov 25 | Stablecoin reserve service: watch mint/burn events, reconcile supply vs. reserves, alert on drift | Go | proof of reserves, reconciliation | **parallel subagents** (one per component) | |
+| ⬜ | Mon Nov 16 | CourseMate API + UI: FastAPI with streaming responses, a minimal chat web page, conversation history | Python + HTML/TS | serving LLM apps, streaming, sessions | testing a web page with Claude in a browser | |
+| ⬜ | Wed Nov 18 | **AI basics lab 2: tool calling and agents from scratch.** What "tool calling" really is (the model writes JSON, your code runs the tool), then a ~40-line agent loop with two tools and no framework; print every message so the loop is visible | Python | tool use, the agent loop, stopping conditions | watch Claude Code's own agent loop (transcript view, `Ctrl+O`) and compare it with mine | `ai-basics` |
+| ⬜ | Fri Nov 20 | CourseMate agent: tools to search notes, generate a quiz and draft an announcement; **a human approves anything that gets sent**; agent evals | Python | tool use, human-in-the-loop, agent evals | Claude Agent SDK | |
+| ⬜ | Sun Nov 22 | CourseMate MCP server: expose the course tools over MCP and use them from Claude Code | Python | MCP, integrating AI with internal systems | **build your own MCP server** (`claude mcp add`) | |
+
+### Phase 3 (Nov 24 – Dec 5): Production AI + fintech backend
+
+| Status | When | Project | Lang | Concept | Claude Code technique | Repo |
+|---|---|---|---|---|---|---|
+| ⬜ | Tue Nov 24 | Observability for CourseMate: traces per request (prompt, retrieved chunks, tool calls), latency and cost per answer, a small dashboard; add caching | Python | LLMOps: tracing, cost and latency budgets, caching | **sessions**: `--continue`, `/resume` | |
 | — | Thu Nov 26 | Thanksgiving: no project. | | | | |
-| ⬜ | Fri Nov 27 | Security day: break it, fix it (2 vulnerable contracts) + Slither/Aderyn on all my contracts + a short audit report | Solidity + Markdown | real attack types, automated auditing | **parallel sessions** (worktrees), `claude -p` | |
-| ⬜ | Weekend Nov 28–29 | **Bridge project:** stablecoin ops agent. Reuse the Week 2 agent pattern: it reads the reserve service and ledger, explains drift alerts, drafts an incident report, human approves. Short demo video. Then a **mock interview loop** (see Job track). | Python + Go | applying the AI lane to fintech/blockchain | custom subagent as an **interviewer** that grills me on my repos | |
+| ⬜ | Fri Nov 27 | Guardrails and prompt-injection lab: poison notes and tool results, watch CourseMate misbehave, add defenses and output validation, one test per attack | Python | AI security: injection, data leaks, tool misuse | safe handling of untrusted content (plan mode + deny rules) | |
+| ⬜ | Sun Nov 29 | Payments ledger API: double-entry ledger, idempotency keys, Postgres | Go | payment correctness, exactly-once transfers | **MCP server** (connect Claude Code to Postgres) | |
+| ⬜ | Tue Dec 1 | Forward-deployed sprint: a "customer" hands me a messy invoice CSV and a half-documented API; clean it, load it into my ledger, LLM categorizes line items with evals, deployment note for their team | Python + Go | data cleaning, integration, AI in a real workflow, customer communication | **have Claude interview me** about requirements before it plans | |
+| ⬜ | Thu Dec 3 | Ship CourseMate: one-command deploy with Terraform (local Docker provider): app + Postgres containers talking to Ollama on the host, secrets out of code, health check, eval gate in CI before a release; plus a short doc on how the same setup maps to a real cloud | Terraform + Docker | IaC, deployment, CI/CD for LLM apps | **headless `claude -p` in CI** (review a `terraform plan`) | |
+| ⬜ | Sat Dec 5 | **AI capstone: CourseMate case study.** Polish, an eval and latency report, architecture diagram, case-study README ("problem → design → results → what I'd do next"), 3-minute demo video (it runs locally) | all | presenting an AI product end to end | **plugins**: package my kit for reuse | |
 
-> **Note (Week 1 Weekend):** PlayToken was not deployed to Base Sepolia. Nothing in the sprint needs Base Sepolia now;
-> the Week 4 projects run on a local Anvil chain.
+### Phase 4 (Dec 7–15): Blockchain + fintech lane, interview prep
 
-### Optional (after the sprint, only when a real job description asks for it)
+| Status | When | Project | Lang | Concept | Claude Code technique | Repo |
+|---|---|---|---|---|---|---|
+| ⬜ | Mon Dec 7 | Gasless approvals (EIP-2612 permit) | Solidity | signatures, EIP-712, replay protection | debugging: `-vvvv` traces, screenshots | |
+| ⬜ | Wed Dec 9 | Yield vault (ERC-4626) | Solidity | share accounting, rounding attacks | **context**: `/context`, `/compact`, `/clear` | |
+| ⬜ | Fri Dec 11 | Stablecoin reserve service: watch mint/burn events, reconcile supply vs. reserves, alert on drift | Go | proof of reserves, reconciliation | **parallel subagents** (one per component) | |
+| ⬜ | Sun Dec 13 | Security day: break it, fix it (2 vulnerable contracts) + Slither/Aderyn on all my contracts + a short audit report | Solidity + Markdown | real attack types, automated auditing | **parallel sessions** (worktrees), `claude -p` | |
+| ⬜ | Tue Dec 15 | **Bridge project:** stablecoin ops agent. Reuse the CourseMate agent pattern: it reads the reserve service and ledger, explains drift alerts, drafts an incident report, human approves. Then a **mock interview loop** (see Job track). | Python + Go | applying the AI lane to fintech/blockchain | custom subagent as an **interviewer** that grills me on my repos | |
+
+> **Note (Week 1 Weekend):** PlayToken was not deployed to Base Sepolia. Nothing in the plan needs Base Sepolia now;
+> the Phase 4 projects run on a local Anvil chain.
+
+### Optional (after the plan, only when a real job description asks for it)
 
 | Status | Project | Lang | Concept | Repo |
 |---|---|---|---|---|
+| ⬜ | Reranking for CourseMate: rerank the top 20 hybrid candidates with a small cross-encoder or the local LLM, and prove it with the Nov 12 retrieval eval (recall@k, MRR) and latency | Python | reranking, quality vs. latency | |
 | ⬜ | Fine-tune a small open model (LoRA) on question-triage data and compare it with prompting, using the Week 2 evals | Python | fine-tuning vs. prompting, cost/quality trade-offs (free with a Google Colab GPU, if available) | |
 | ⬜ | Multi-agent workflow with a framework (LangGraph or similar) | Python | orchestration, state, retries | |
 | ⬜ | Merkle airdrop | Solidity + TS | Merkle proofs | |
@@ -176,29 +197,29 @@ Don't push the whole plan back.
 
 ---
 
-## Job track (runs every day of the sprint, about 20–30 minutes)
+## Job track (runs alongside the projects, about 20–30 minutes a day)
 
-Work happens in my private repo **Syriacode/job-search**. Golden rule: apply only to companies I can verify are real
+Work happens in my private repo **Syriacode/job-search**. Dates follow the every-other-day plan. Golden rule: apply only to companies I can verify are real
 and have a history. Salary floor: $150k. Phoenix on-site/hybrid, remote, or relocation for the right employer.
 Aim for about **70% AI applications, 30% blockchain/fintech**.
 
 **Resume versions:**
 - **(A) AI engineer / applied AI / forward deployed** — AI lane projects and the Go ledger. **No blockchain on it.**
 - **(B) AI solutions / DevRel / AI education** — the same AI projects, led by teaching, curriculum design, talks and writing.
-- **(C) Blockchain + fintech backend** — Week 1, Week 4, the ledger, plus one line on AI work.
+- **(C) Blockchain + fintech backend** — Week 1, Phase 4, the ledger, plus one line on AI work.
 
 | Status | When | Job task |
 |---|---|---|
-| ⬜ | Week 2 Mon–Tue | Draft resumes A, B and C from what's ✅ now and the teaching record. A and B fill in as the week goes. |
-| ⬜ | Week 2 Wed | GitHub profile README and LinkedIn (headline, About, Featured) aimed at **AI engineering first**; pin AI repos as they land. |
-| ⬜ | Week 2 Thu | Visa prep: ask my immigration attorney whether I'm counted against the H-1B cap and how long a transfer takes. Write a two-line answer for "Do you need sponsorship?" |
-| ⬜ | Week 2 Fri–Sun | Target list of 40 verified companies (AI startups, enterprises building AI, AI platform companies, EdTech, fintech, a few crypto). Send the **first 5 applications**. |
-| ⬜ | Week 3 (daily) | **1–2 applications a day** + **30 minutes of Python coding practice** (arrays, hashing, two pointers, BFS/DFS: AI engineer loops still include a coding round). |
-| ⬜ | Week 3 Weekend | Publish the CourseMate demo video + a LinkedIn post. Practice 2 **LLM system design** questions out loud (from my `INTERVIEW.md` files). |
-| ⬜ | Week 4 (daily) | **1–2 applications a day**, follow up on Week 2 ones, reach out to 1 person a day at target companies (alumni, ex-students, conference contacts). |
-| ⬜ | Week 4 Weekend | Mock interview loop: one coding round, one LLM system design, one behavioral (5 STAR stories), one "walk me through your repo". Turn one `GUIDE.md` into a public tutorial (DevRel writing sample). |
+| ⬜ | Nov 9–12 | Draft resumes A, B and C from what's ✅ now and the teaching record. A and B fill in as the week goes. |
+| ⬜ | Nov 13–14 | GitHub profile README and LinkedIn (headline, About, Featured) aimed at **AI engineering first**; pin AI repos as they land. |
+| ⬜ | Nov 15–16 | Visa prep: ask my immigration attorney whether I'm counted against the H-1B cap and how long a transfer takes. Write a two-line answer for "Do you need sponsorship?" |
+| ⬜ | Nov 17–22 | Target list of 40 verified companies (AI startups, enterprises building AI, AI platform companies, EdTech, fintech, a few crypto). Send the **first 5 applications**. |
+| ⬜ | Nov 23 – Dec 5 (daily) | **1–2 applications a day** + **30 minutes of Python coding practice** (arrays, hashing, two pointers, BFS/DFS: AI engineer loops still include a coding round). |
+| ⬜ | Dec 5–6 | Publish the CourseMate demo video + a LinkedIn post. Practice 2 **LLM system design** questions out loud (from my `INTERVIEW.md` files). |
+| ⬜ | Dec 7–15 (daily) | **1–2 applications a day**, follow up on earlier ones, reach out to 1 person a day at target companies (alumni, ex-students, conference contacts). |
+| ⬜ | Dec 15 | Mock interview loop: one coding round, one LLM system design, one behavioral (5 STAR stories), one "walk me through your repo". Turn one `GUIDE.md` into a public tutorial (DevRel writing sample). |
 
-**Sprint target by Nov 29:** resume A that reads as a real AI engineer, a recorded CourseMate demo with evals and a case
+**Target by Dec 15:** resume A that reads as a real AI engineer, a recorded CourseMate demo with evals and a case
 study, about 30–40 tailored applications sent, and a practiced interview loop.
 
 ---
