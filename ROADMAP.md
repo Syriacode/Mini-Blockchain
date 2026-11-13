@@ -142,7 +142,7 @@ If a project slips, move everything after it; don't squeeze two into one day.
 | ✅ | Mon Nov 9 | Question triage CLI: classify student/support questions (topic, urgency, needs-human) with an LLM; Pydantic schemas, retries, token and cost log | Python | LLM API basics: messages, system prompts, structured output, temperature, tokens and cost | user-level `~/.claude/CLAUDE.md` + `/memory` ("how to teach me Python and AI") | [question-triage](https://github.com/Syriacode/question-triage) |
 | ✅ | Tue Nov 10 | Evals for the triage CLI: 50-example golden set, accuracy per label, LLM-as-judge for explanations, eval gate in CI | Python | evaluation, regressions, "it looked right" isn't a test | Claude-written test-data scripts (generate and then hand-check the golden set) | [question-triage](https://github.com/Syriacode/question-triage) (`evals/`, PR #2) |
 | ✅ | Wed Nov 11 | CourseMate RAG: answer questions over my course notes with citations; chunking, embeddings, Postgres + pgvector in docker-compose; "I don't know" when not grounded | Python + Docker | embeddings, chunking, retrieval, grounding | choosing models and watching cost (`/model`, `/cost`) | [coursemate](https://github.com/Syriacode/coursemate) |
-| ⬜ | Thu Nov 12 | Better retrieval: keyword search (BM25, by hand), vector search, hybrid (RRF), measured with recall@k and MRR on a reviewed golden set; CourseMate uses the winner. (Reranking moved to Optional.) | Python | search quality, measuring retrieval | **notebook editing** (Jupyter): compare runs with Claude | [coursemate](https://github.com/Syriacode/coursemate) (branch `retrieval`, `GUIDE-retrieval.md`) |
+| ✅ | Thu Nov 12 | Better retrieval: keyword search (BM25, by hand), vector search, hybrid (RRF), measured with recall@k and MRR on a reviewed golden set; CourseMate uses the winner. (Reranking moved to Optional.) | Python | search quality, measuring retrieval | **notebook editing** (Jupyter): compare runs with Claude | [coursemate](https://github.com/Syriacode/coursemate) (PR #1: vector won, recall@3 0.96 vs. hybrid 0.84) |
 | ⬜ | Sat Nov 14 | **AI basics lab 1: how an LLM works.** A notebook with small experiments on the local model: tokens and the tokenizer, next-token prediction, temperature (the same prompt 5 times at 0 and at 1), the context window and silent truncation (`num_ctx`), system vs. user messages, why models make things up | Python + Jupyter | tokens, sampling, context window, hallucination | **Claude as a tutor**: explain this, then quiz me | new repo `ai-basics` |
 
 ### Phase 2 (Nov 16–22): CourseMate gets an app and an agent (AI lane)
@@ -300,3 +300,9 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
     cache. Check `/usage` (or `/cost`) at the end of a session, not only when you hit a limit. The same rule applies
     inside your own app: don't pay for a model call you don't need, keep prompts as small as the job allows, and use
     the smallest model that passes your evals. (Week 2 Wed)
+15. **Explore in a notebook, keep in a module, and let Claude read the outputs.** A notebook is the quickest way to
+    *see* what a model does (vectors, scores, misses), and Claude Code reads notebook outputs and edits single cells,
+    so you can ask "why did this question miss?" about real numbers instead of guesses. Code you rely on still
+    belongs in tested `.py` files that the notebook only calls. Save every run you may compare (`--save
+    evals/runs/NAME.json`) and have Claude diff runs question by question. Run the notebook in CI
+    (`nbconvert --execute`), because a notebook nobody re-runs quietly breaks. (Week 2 Thu)
