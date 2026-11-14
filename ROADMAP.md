@@ -17,8 +17,10 @@ roles, and become fluent in Claude Code along the way.
 3. Fintech backend (Go, payments, ledgers)
 4. Blockchain / stablecoin engineering, e.g. Coinbase's *Senior Software Engineer, Stablecoins*
 
-**Path:** Week 1 (blockchain refresh) is done. Then (Nov 9 – Dec 15, 2026): AI foundations with two AI basics
-labs, production AI and the Go ledger, then the blockchain lane and interview prep. A job track runs alongside, so
+**Path:** Week 1 (blockchain refresh) is done. Then (Nov 9 – Dec 23, 2026): AI foundations with two AI basics
+labs, production AI and the Go ledger, then the blockchain lane and interview prep, then Phase 5 (added Nov 14) to
+close the skill gaps that job postings ask for most (hosted LLM APIs and AWS, LangGraph, Rust/Solana, a live L2
+deploy, Kubernetes basics). See "Skills in demand" below. A job track runs alongside, so
 applications start now.
 
 **Rhythm (changed Nov 11):** **one project every other day**, about 1.5–2 hours. The day in between is a
@@ -149,7 +151,7 @@ If a project slips, move everything after it; don't squeeze two into one day.
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Mon Nov 16 | CourseMate API + UI: FastAPI with streaming responses, a minimal chat web page, conversation history | Python + HTML/TS | serving LLM apps, streaming, sessions | testing a web page with Claude in a browser | |
+| ⬜ | Mon Nov 16 | CourseMate API + UI: **async** FastAPI with streaming responses (SSE), a minimal chat web page, conversation history; add **hosted providers (Anthropic and OpenAI APIs)** behind the existing `LLMClient`, next to Ollama, and compare cost and latency | Python + HTML/TS | serving LLM apps, async Python, streaming, sessions, multi-provider LLM APIs | testing a web page with Claude in a browser | |
 | ⬜ | Wed Nov 18 | **AI basics lab 2: tool calling and agents from scratch.** What "tool calling" really is (the model writes JSON, your code runs the tool), then a ~40-line agent loop with two tools and no framework; print every message so the loop is visible | Python | tool use, the agent loop, stopping conditions | watch Claude Code's own agent loop (transcript view, `Ctrl+O`) and compare it with mine | `ai-basics` |
 | ⬜ | Fri Nov 20 | CourseMate agent: tools to search notes, generate a quiz and draft an announcement; **a human approves anything that gets sent**; agent evals | Python | tool use, human-in-the-loop, agent evals | Claude Agent SDK | |
 | ⬜ | Sun Nov 22 | CourseMate MCP server: expose the course tools over MCP and use them from Claude Code | Python | MCP, integrating AI with internal systems | **build your own MCP server** (`claude mcp add`) | |
@@ -158,12 +160,12 @@ If a project slips, move everything after it; don't squeeze two into one day.
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Tue Nov 24 | Observability for CourseMate: traces per request (prompt, retrieved chunks, tool calls), latency and cost per answer, a small dashboard; add caching | Python | LLMOps: tracing, cost and latency budgets, caching | **sessions**: `--continue`, `/resume` | |
+| ⬜ | Tue Nov 24 | Observability for CourseMate: traces per request (prompt, retrieved chunks, tool calls) with **Langfuse** (self-hosted in Docker) and **OpenTelemetry**, latency and cost per answer, a small dashboard; add caching | Python | LLMOps: tracing, cost and latency budgets, caching | **sessions**: `--continue`, `/resume` | |
 | — | Thu Nov 26 | Thanksgiving: no project. | | | | |
 | ⬜ | Fri Nov 27 | Guardrails and prompt-injection lab: poison notes and tool results, watch CourseMate misbehave, add defenses and output validation, one test per attack | Python | AI security: injection, data leaks, tool misuse | safe handling of untrusted content (plan mode + deny rules) | |
 | ⬜ | Sun Nov 29 | Payments ledger API: double-entry ledger, idempotency keys, Postgres | Go | payment correctness, exactly-once transfers | **MCP server** (connect Claude Code to Postgres) | |
 | ⬜ | Tue Dec 1 | Forward-deployed sprint: a "customer" hands me a messy invoice CSV and a half-documented API; clean it, load it into my ledger, LLM categorizes line items with evals, deployment note for their team | Python + Go | data cleaning, integration, AI in a real workflow, customer communication | **have Claude interview me** about requirements before it plans | |
-| ⬜ | Thu Dec 3 | Ship CourseMate: one-command deploy with Terraform (local Docker provider): app + Postgres containers talking to Ollama on the host, secrets out of code, health check, eval gate in CI before a release; plus a short doc on how the same setup maps to a real cloud | Terraform + Docker | IaC, deployment, CI/CD for LLM apps | **headless `claude -p` in CI** (review a `terraform plan`) | |
+| ⬜ | Thu Dec 3 | Ship CourseMate **to AWS**: one-command deploy with Terraform (container on ECS Fargate or App Runner, Postgres with pgvector, secrets in AWS Secrets Manager, a hosted model through **Amazon Bedrock**), health check, eval gate in CI before a release, an **AWS budget alarm**, and `terraform destroy` when done. Keep the local Docker setup as the free fallback. | Terraform + Docker + AWS | IaC, cloud deployment, CI/CD for LLM apps, cost control | **headless `claude -p` in CI** (review a `terraform plan`) | |
 | ⬜ | Sat Dec 5 | **AI capstone: CourseMate case study.** Polish, an eval and latency report, architecture diagram, case-study README ("problem → design → results → what I'd do next"), 3-minute demo video (it runs locally) | all | presenting an AI product end to end | **plugins**: package my kit for reuse | |
 
 ### Phase 4 (Dec 7–15): Blockchain + fintech lane, interview prep
@@ -177,22 +179,32 @@ If a project slips, move everything after it; don't squeeze two into one day.
 | ⬜ | Tue Dec 15 | **Bridge project:** stablecoin ops agent. Reuse the CourseMate agent pattern: it reads the reserve service and ledger, explains drift alerts, drafts an incident report, human approves. Then a **mock interview loop** (see Job track). | Python + Go | applying the AI lane to fintech/blockchain | custom subagent as an **interviewer** that grills me on my repos | |
 
 > **Note (Week 1 Weekend):** PlayToken was not deployed to Base Sepolia. Nothing in the plan needs Base Sepolia now;
-> the Phase 4 projects run on a local Anvil chain.
+> the Phase 4 projects run on a local Anvil chain. (Update Nov 14: a live L2 deploy is now in Phase 5, because job
+> posts ask for at least one real deployment on an L2.)
+
+### Phase 5 (Dec 17–23): close the most-requested gaps (added Nov 14 from job-posting data)
+
+| Status | When | Project | Lang | Concept | Claude Code technique | Repo |
+|---|---|---|---|---|---|---|
+| ⬜ | Thu Dec 17 | **Rust + Solana:** Rust basics, then a small Anchor program (a vault: deposit, withdraw, PDA accounts) with tests on a local validator | Rust | Rust ownership and errors, Solana accounts model vs. EVM storage | learning a second new language with Claude (compare with the Go day) | new repo `solana-vault` |
+| ⬜ | Sat Dec 19 | **Live L2 deploy:** deploy and verify PlayToken and the upgradeable stablecoin (proxy + implementation) on Base Sepolia with a fresh test wallet, then do one upgrade on-chain; record addresses and Basescan links in the READMEs | Solidity | real deployment, verification, proxy upgrades on a live chain | secrets safety again: keystore in a separate shell, deny rules | `base-sepolia-token`, `upgradeable-stablecoin` |
+| ⬜ | Mon Dec 21 | **LangGraph:** rebuild the CourseMate agent as a LangGraph graph (state, retries, a human-approval interrupt) and compare it with the Agent SDK version on the same agent evals | Python | agent frameworks, stateful orchestration | **parallel subagents** (one per version) | `coursemate` (branch) |
+| ⬜ | Wed Dec 23 | **Kubernetes basics:** run the Go payments ledger + Postgres on a local `kind` cluster with health probes, config and secrets, and a rollout | Go + YAML | containers at scale, probes, rollouts | reviewing YAML with a custom subagent | `payments-ledger` (branch) |
 
 ### Optional (after the plan, only when a real job description asks for it)
 
 | Status | Project | Lang | Concept | Repo |
 |---|---|---|---|---|
 | ⬜ | Reranking for CourseMate: rerank the top 20 hybrid candidates with a small cross-encoder or the local LLM, and prove it with the Nov 12 retrieval eval (recall@k, MRR) and latency | Python | reranking, quality vs. latency | |
-| ⬜ | Fine-tune a small open model (LoRA) on question-triage data and compare it with prompting, using the Week 2 evals | Python | fine-tuning vs. prompting, cost/quality trade-offs (free with a Google Colab GPU, if available) | |
-| ⬜ | Multi-agent workflow with a framework (LangGraph or similar) | Python | orchestration, state, retries | |
+| ⬜ | Fine-tune a small open model (LoRA) on question-triage data and compare it with prompting, using the Week 2 evals. **Do this next if the job-search skills log keeps showing fine-tuning or PyTorch** (15–33% of AI engineer posts in Nov 2026 surveys). | Python | fine-tuning vs. prompting, cost/quality trade-offs (free with a Google Colab GPU, if available) | |
+| ↗ moved | Multi-agent workflow with a framework: moved to Phase 5 (Dec 21, LangGraph) | Python | orchestration, state, retries | |
 | ⬜ | Merkle airdrop | Solidity + TS | Merkle proofs | |
 | ⬜ | Reserve service, Transfer event indexer (optional) | Go | event logs, indexing, reorgs | |
 | ⬜ | Mini dApp front end | TypeScript | wallet connection | |
 | ⬜ | Tokenized treasury fund + client brief | Solidity + Markdown | tokenization, compliance | |
 | ⬜ | Transaction signer service | Go | key management, custody | |
 | ⬜ | Multi-brand stablecoin factory | Solidity | CREATE2, minimal proxies | |
-| ⬜ | Rust Merkle crate | Rust | Rust ownership | |
+| ⬜ | Rust Merkle crate (after the Phase 5 Solana project) | Rust | Rust ownership | |
 | ⬜ | Fund-flow tracer | Python | blockchain forensics | |
 
 ---
@@ -221,6 +233,38 @@ Aim for about **70% AI applications, 30% blockchain/fintech**.
 
 **Target by Dec 15:** resume A that reads as a real AI engineer, a recorded CourseMate demo with evals and a case
 study, about 30–40 tailored applications sent, and a practiced interview loop.
+
+---
+
+## Skills in demand (updated Nov 14, 2026)
+
+Where the plan comes from. Two sources: the job descriptions the job-search agent reads every day (logged in
+`Syriacode/job-search/skills_demand.csv`, summarized in Friday's digest), and published counts across many postings.
+
+**AI engineer postings** (published analyses of hundreds to thousands of 2026 postings):
+- **Table stakes:** Python (59–71% of posts), LLMs/LLM APIs (55–66%).
+- **Core:** evals (about 56%), agents (47–50%), RAG (26–40%), vector databases (about 25%), prompt engineering.
+- **Platform:** a major cloud, most often **AWS** (about 37%); Docker, CI/CD; Kubernetes for infra-heavy roles.
+- **Frameworks:** LangChain/LangGraph (10–25%), LlamaIndex; MCP is rising.
+- **Production:** observability and tracing (Langfuse, OpenTelemetry), cost and latency, streaming (SSE), async Python, prompt-injection defense.
+- **Also asked:** PyTorch (about 33%) and fine-tuning (15–26%), mostly in ML-heavy roles.
+- Forward-deployed roles add **TypeScript + Python**, APIs, webhooks, SQL and customer communication.
+
+**Blockchain postings:**
+- **Solidity/EVM** leads (about 23% of blockchain developer posts), with **Rust** close behind and rising (about 19%), mainly for Solana.
+- **Go** (and C++/Rust) for protocol and infrastructure roles; Foundry/Hardhat; at least one **live L2 deployment**.
+- Security and auditing; TypeScript (viem/ethers) for integrations; cloud, Docker and Kubernetes for node/infra roles.
+- From my own target postings: Go + cloud (AWS/GCP) backends (Coinbase, Robinhood), payments correctness (idempotency, reconciliation), contract lifecycle security (Ondo), Rust (Quicknode), Solana as a plus (Ondo).
+
+**Gaps this plan now closes:** hosted LLM APIs (Nov 16), Langfuse/OpenTelemetry (Nov 24), AWS + Bedrock deploy
+(Dec 3), Rust + Solana, a live L2 deploy, LangGraph, Kubernetes basics (Phase 5). **Still open, on purpose:**
+PyTorch/fine-tuning (optional; revisit if the skills log keeps showing it), ZK proofs (niche).
+
+Sources: [AI Engineer Roadmap 2026: what 390 job postings require](https://dev.to/ali_82f3409ed625e8ba8515b/ai-engineer-roadmap-2026-what-390-job-postings-actually-require-3jdo),
+[AI Engineer skills: 3,449-posting analysis](https://dev.to/gnana_6392e836fd500a957dc/ai-engineer-skills-companies-want-in-2026-3449-posting-analysis-5f9l),
+[AI Engineer in 2026 (4,155 postings)](https://interviewstack.io/blog/how-ai-is-changing-ai-engineer-2026),
+[Blockchain developer skills: 752 job posts](https://huntr.co/resume-skills/blockchain-developer),
+[Blockchain developer resume keywords (2026)](https://www.techiecv.com/resume-skills/blockchain-developer).
 
 ---
 
@@ -256,6 +300,13 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
 | Working with customers: messy data, integrations, docs | FDE / solutions engineer posts | Forward-deployed sprint, teaching record |
 | Deploying AI services, CI/CD | AI engineer / FDE posts | Ship CourseMate (Terraform + Docker + CI eval gate) |
 | Agentic coding tools (Claude Code) | AI engineer / developer tools posts | every project's Claude Code technique (Progress tables) and `GUIDE.md` |
+| Hosted LLM APIs (Anthropic, OpenAI, Bedrock), async Python | most AI engineer posts | CourseMate API (Nov 16), Ship to AWS with Bedrock (Dec 3) |
+| AWS / cloud deployment | about 37% of AI engineer posts; Coinbase, Robinhood | Ship CourseMate to AWS (Dec 3) |
+| Agent frameworks (LangGraph / LangChain) | 10–25% of AI engineer posts | LangGraph agent (Phase 5) |
+| Observability tools (Langfuse, OpenTelemetry) | AI engineer posts | Observability for CourseMate (Nov 24) |
+| Rust, Solana | Quicknode, Ondo (plus), about 19% of blockchain posts | Rust + Solana vault (Phase 5), Rust Merkle crate (optional) |
+| A live L2 deployment | most blockchain developer posts | Live L2 deploy (Phase 5) |
+| Kubernetes | infra-heavy AI and blockchain posts | Kubernetes basics (Phase 5) |
 
 ---
 
