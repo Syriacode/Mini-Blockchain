@@ -145,7 +145,7 @@ If a project slips, move everything after it; don't squeeze two into one day.
 | ✅ | Tue Nov 10 | Evals for the triage CLI: 50-example golden set, accuracy per label, LLM-as-judge for explanations, eval gate in CI | Python | evaluation, regressions, "it looked right" isn't a test | Claude-written test-data scripts (generate and then hand-check the golden set) | [question-triage](https://github.com/Syriacode/question-triage) (`evals/`, PR #2) |
 | ✅ | Wed Nov 11 | CourseMate RAG: answer questions over my course notes with citations; chunking, embeddings, Postgres + pgvector in docker-compose; "I don't know" when not grounded | Python + Docker | embeddings, chunking, retrieval, grounding | choosing models and watching cost (`/model`, `/cost`) | [coursemate](https://github.com/Syriacode/coursemate) |
 | ✅ | Thu Nov 12 | Better retrieval: keyword search (BM25, by hand), vector search, hybrid (RRF), measured with recall@k and MRR on a reviewed golden set; CourseMate uses the winner. (Reranking moved to Optional.) | Python | search quality, measuring retrieval | **notebook editing** (Jupyter): compare runs with Claude | [coursemate](https://github.com/Syriacode/coursemate) (PR #1: vector won, recall@3 0.96 vs. hybrid 0.84) |
-| ⬜ | Sat Nov 14 | **AI basics lab 1: how an LLM works.** A notebook with small experiments on the local model: tokens and the tokenizer, next-token prediction, temperature (the same prompt 5 times at 0 and at 1), the context window and silent truncation (`num_ctx`), system vs. user messages, why models make things up | Python + Jupyter | tokens, sampling, context window, hallucination | **Claude as a tutor**: explain this, then quiz me | new repo `ai-basics` |
+| ✅ | Sat Nov 14 | **AI basics lab 1: how an LLM works.** A notebook with small experiments on the local model: tokens and the tokenizer, next-token prediction, temperature (the same prompt 5 times at 0 and at 1), the context window and silent truncation (`num_ctx`), system vs. user messages, why models make things up | Python + Jupyter | tokens, sampling, context window, hallucination | **Claude as a tutor**: explain this, then quiz me | [ai-basics](https://github.com/Syriacode/ai-basics) (lab 1 notebook Parts A–D run on the real model; Parts E–F outputs, README and INTERVIEW still to finish) |
 
 ### Phase 2 (Nov 16–22): CourseMate gets an app and an agent (AI lane)
 
@@ -357,3 +357,9 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
     belongs in tested `.py` files that the notebook only calls. Save every run you may compare (`--save
     evals/runs/NAME.json`) and have Claude diff runs question by question. Run the notebook in CI
     (`nbconvert --execute`), because a notebook nobody re-runs quietly breaks. (Week 2 Thu)
+16. **Make Claude teach, not just build, and keep the teaching in a file.** A custom output style
+    (`.claude/output-styles/tutor.md`, with `keep-coding-instructions: true`) makes every reply explain with a paper
+    example and then quiz you one question at a time. Keep it in the repo so it's versioned, and switch back with
+    `/output-style default` when you just want code written. Ask the tutor about your own outputs (`@notebook` with its
+    results), and check any fact it states about a tool or version by running something. In Jupyter, restart the
+    kernel after Claude edits a module, or the notebook keeps running the old code. (Phase 1 Sat)
