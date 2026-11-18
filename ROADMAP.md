@@ -151,7 +151,7 @@ If a project slips, move everything after it; don't squeeze two into one day.
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Mon Nov 16 | CourseMate API + UI: **async** FastAPI with streaming responses (SSE), a minimal chat web page, conversation history; add **hosted providers (Anthropic and OpenAI APIs)** behind the existing `LLMClient`, next to Ollama, and compare cost and latency | Python + HTML/TS | serving LLM apps, async Python, streaming, sessions, multi-provider LLM APIs | testing a web page with Claude in a browser | |
+| ✅ | Mon Nov 16 | CourseMate API + UI: **async** FastAPI with streaming responses (SSE), a minimal chat web page, conversation history; add **hosted providers (Anthropic and OpenAI APIs)** behind the existing `LLMClient`, next to Ollama, and compare cost and latency | Python + HTML/TS | serving LLM apps, async Python, streaming, sessions, multi-provider LLM APIs | testing a web page with Claude in a browser | [coursemate](https://github.com/Syriacode/coursemate) (PR #2: SSE API, chat page, sessions, Ollama + OpenAI + Anthropic formats tested for $0, compare; Step 10 still to finish: README, INTERVIEW, CI web smoke test, `evals/runs/compare-local.txt`) |
 | ⬜ | Wed Nov 18 | **AI basics lab 2: tool calling and agents from scratch.** What "tool calling" really is (the model writes JSON, your code runs the tool), then a ~40-line agent loop with two tools and no framework; print every message so the loop is visible | Python | tool use, the agent loop, stopping conditions | watch Claude Code's own agent loop (transcript view, `Ctrl+O`) and compare it with mine | `ai-basics` |
 | ⬜ | Fri Nov 20 | CourseMate agent: tools to search notes, generate a quiz and draft an announcement; **a human approves anything that gets sent**; agent evals | Python | tool use, human-in-the-loop, agent evals | Claude Agent SDK | |
 | ⬜ | Sun Nov 22 | CourseMate MCP server: expose the course tools over MCP and use them from Claude Code | Python | MCP, integrating AI with internal systems | **build your own MCP server** (`claude mcp add`) | |
@@ -363,3 +363,9 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
     `/output-style default` when you just want code written. Ask the tutor about your own outputs (`@notebook` with its
     results), and check any fact it states about a tool or version by running something. In Jupyter, restart the
     kernel after Claude edits a module, or the notebook keeps running the old code. (Phase 1 Sat)
+17. **Give Claude eyes on what the user sees, and turn what it finds into tests.** Unit tests prove the server
+    sends the right events; only a browser proves the page shows them right. Start Claude Code with `claude --chrome`
+    (signed in with `/login`, not an API key) and ask it to test like a QA person: a numbered list of happy and
+    unhappy paths, the console read at the end, pass or fail for each, before it changes any code. Each bug it finds
+    becomes a fix and, for server bugs, a test. Connect the browser only for sessions that need it (its tools take
+    up context), and keep it on `localhost`: it acts in your real, signed-in Chrome. (Phase 2 Mon)
