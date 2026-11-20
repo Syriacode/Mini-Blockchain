@@ -23,9 +23,10 @@ close the skill gaps that job postings ask for most (hosted LLM APIs and AWS, La
 deploy, Kubernetes basics). See "Skills in demand" below. A job track runs alongside, so
 applications start now.
 
-**Rhythm (changed Nov 11):** **one project every other day**, about 1.5–2 hours. The day in between is a
-**reading day**: re-read the guide's overview, answer its "Check your understanding" questions without looking, and
-look up anything unclear. Quality over quantity. Each project gets **its own chat**, and usually its own GitHub repo
+**Rhythm (changed Nov 20):** **one project every two days, about 4–5 hours in total**, done as **two sessions**
+(Part A on day 1, Part B on day 2). Projects really take 4+ hours, so the old "1.5–2 hours" estimate is gone and no
+project is cut. Re-reading the overview and answering the "Check your understanding" questions now happens at the
+start of day 2, before Part B. Quality over quantity. Each project gets **its own chat**, and usually its own GitHub repo
 (projects that improve CourseMate or the triage CLI happen on a branch of that repo).
 
 ---
@@ -94,8 +95,10 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
   about and why it matters; what we'll build (the parts and how they fit, with a small diagram); how we'll test it;
   a short definition of every new tool, technology or term used; and, when the project builds on an earlier one,
   a plain-language recap of what that earlier project built.
-- **Size:** a project fits in **about 1.5–2 hours** of hands-on time, with a natural place to stop halfway. One project
-  every other day.
+- **Size (changed Nov 20):** a project is **about 4–5 hours** of hands-on time, split into **Part A (day 1, about
+  2–2.5 hours)** and **Part B (day 2, about 2–2.5 hours)**. Part A must end at a working, tested, committed checkpoint
+  (state it in the guide: "Stop here. Part A is done when …"). Part B adds the rest (evals, README, INTERVIEW). One
+  project every two days.
 - **Verify before handing over:** build and test a reference solution privately so every command in the guide works.
   Don't push the solution. I write the code with Claude Code myself.
 - **Every project repo must include:** the code, tests, a CI workflow, `README.md` (run commands, design decisions,
@@ -135,6 +138,8 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 
 Changed on Nov 11: the sprint was one project a day, which went too fast to understand the AI basics. Now there's a
 project every other day, a reading day in between, and two **AI basics labs** before the bigger AI projects.
+Changed on Nov 20: projects take 4–5 hours, so each project now uses both of its two days (Part A and Part B). All
+projects stay. The dates below are each project's **start day**; it finishes the next day.
 If a project slips, move everything after it; don't squeeze two into one day.
 
 ### Phase 1 (Nov 9–15): AI foundations — CourseMate v1 (AI lane)
