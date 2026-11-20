@@ -165,7 +165,7 @@ If a project slips, move everything after it; don't squeeze two into one day.
 | ⬜ | Fri Nov 27 | Guardrails and prompt-injection lab: poison notes and tool results, watch CourseMate misbehave, add defenses and output validation, one test per attack | Python | AI security: injection, data leaks, tool misuse | safe handling of untrusted content (plan mode + deny rules) | |
 | ⬜ | Sun Nov 29 | Payments ledger API: double-entry ledger, idempotency keys, Postgres | Go | payment correctness, exactly-once transfers | **MCP server** (connect Claude Code to Postgres) | |
 | ⬜ | Tue Dec 1 | Forward-deployed sprint: a "customer" hands me a messy invoice CSV and a half-documented API; clean it, load it into my ledger, LLM categorizes line items with evals, deployment note for their team | Python + Go | data cleaning, integration, AI in a real workflow, customer communication | **have Claude interview me** about requirements before it plans | |
-| ⬜ | Thu Dec 3 | Ship CourseMate **to AWS**: one-command deploy with Terraform (container on ECS Fargate or App Runner, Postgres with pgvector, secrets in AWS Secrets Manager, a hosted model through **Amazon Bedrock**), health check, eval gate in CI before a release, an **AWS budget alarm**, and `terraform destroy` when done. Keep the local Docker setup as the free fallback. **Also the main lab for the AWS certification track (Domain 2 week).** | Terraform + Docker + AWS | IaC, cloud deployment, CI/CD for LLM apps, cost control | **headless `claude -p` in CI** (review a `terraform plan`) | |
+| ⬜ | Thu Dec 3 | Ship CourseMate **to AWS**: one-command deploy with Terraform (container on ECS Fargate or App Runner, Postgres with pgvector, secrets in AWS Secrets Manager, a hosted model through **Amazon Bedrock**), health check, eval gate in CI before a release, an **AWS budget alarm**, and `terraform destroy` when done. Keep the local Docker setup as the free fallback. **Later reused as the lab for the AWS certification track (after the roadmap).** | Terraform + Docker + AWS | IaC, cloud deployment, CI/CD for LLM apps, cost control | **headless `claude -p` in CI** (review a `terraform plan`) | |
 | ⬜ | Sat Dec 5 | **AI capstone: CourseMate case study.** Polish, an eval and latency report, architecture diagram, case-study README ("problem → design → results → what I'd do next"), 3-minute demo video (it runs locally) | all | presenting an AI product end to end | **plugins**: package my kit for reuse | |
 
 ### Phase 4 (Dec 7–15): Blockchain + fintech lane, interview prep
@@ -191,33 +191,6 @@ If a project slips, move everything after it; don't squeeze two into one day.
 | ⬜ | Mon Dec 21 | **LangGraph:** rebuild the CourseMate agent as a LangGraph graph (state, retries, a human-approval interrupt) and compare it with the Agent SDK version on the same agent evals | Python | agent frameworks, stateful orchestration | **parallel subagents** (one per version) | `coursemate` (branch) |
 | ⬜ | Wed Dec 23 | **Kubernetes basics:** run the Go payments ledger + Postgres on a local `kind` cluster with health probes, config and secrets, and a rollout | Go + YAML | containers at scale, probes, rollouts | reviewing YAML with a custom subagent | `payments-ledger` (branch) |
 
-### Certification track: AWS Certified Solutions Architect – Associate (SAA-C03) (added Nov 20)
-
-**Overview (read this first).**
-- **What it is:** an AWS exam that checks whether you can *design* systems on AWS: which services to pick and how to connect them so the system is secure, keeps running when something fails, is fast enough, and doesn't cost more than it should. It's multiple choice (65 questions, 130 minutes, $150, pass at 720 out of 1,000). No coding on the exam.
-- **Why:** AWS Training & Certification jobs (curriculum developer, technical instructor, Cloud Institute) ask for an AWS associate certification, and many solutions and AI-engineer posts list it. It also covers the "no cloud experience" gap in the job search.
-- **How we'll study:** about **45–60 minutes a day**, next to the projects, for six weeks. Each week covers one exam domain. You learn a topic, then **do it for real in the AWS console or with Terraform**, then answer practice questions on it. The Dec 3 "Ship CourseMate to AWS" project is the hands-on center: it touches most of the services on the exam.
-- **How we'll test it:** practice questions each week (track your score per domain in a small `scores.md`), then two full timed practice exams. Book the real exam only when you score **80% or more twice in a row**.
-- **The four domains (exam weights):** Design Secure Architectures **30%**, Design Resilient Architectures **26%**, Design High-Performing Architectures **24%**, Design Cost-Optimized Architectures **20%**.
-- **New words:**
-  - **Region / Availability Zone (AZ):** a region is a geographic area (e.g. us-west-2, Oregon); each region has several AZs, separate data centers. "Multi-AZ" means a copy in a second data center so one failure doesn't take you down.
-  - **IAM:** Identity and Access Management: users, groups, **roles** (temporary permissions a service or person can take on) and **policies** (JSON documents that say who may do what).
-  - **VPC:** your private network inside AWS, split into **subnets** (public ones reach the internet; private ones don't). Security groups are firewalls on each resource.
-  - **EC2 / ECS Fargate / Lambda:** three ways to run code: a virtual machine you manage, a container AWS runs for you, and a function that runs only when called.
-  - **S3 / EBS / EFS:** object storage (files by key), a disk attached to one machine, a shared network file system.
-  - **RDS / Aurora / DynamoDB:** managed relational databases (Postgres, MySQL) and a managed key-value database.
-  - **Well-Architected Framework:** AWS's checklist of good design (security, reliability, performance, cost, operations, sustainability). The exam questions are built on it.
-- **Cost safety:** use a fresh AWS account with an **AWS Budgets alarm at $10** before you create anything, and delete what you build at the end of each session (`terraform destroy` or delete in the console).
-
-| Status | When | Step | What to do | Done when |
-|---|---|---|---|---|
-| ⬜ | Nov 23–29 | **Setup + Domain 1: secure (30%)** | Create the AWS account, turn on MFA for the root user, create an admin IAM user, set the $10 budget alarm. Download the official SAA-C03 exam guide (AWS docs) and read the task list. Start the free exam-prep course on **AWS Skill Builder**. Study IAM (users, roles, policies, least privilege), KMS encryption, Secrets Manager, VPC security groups vs. network ACLs. Hands-on: write one IAM policy by hand that lets a role read only one S3 bucket, and test it. | Budget alarm on; IAM policy test works; first practice set on security ≥ 70% |
-| ⬜ | Nov 30 – Dec 6 | **Domain 2: resilient (26%)** + **Dec 3 project** | Study multi-AZ, Auto Scaling, load balancers (ALB), RDS Multi-AZ vs. read replicas, backups, SQS/SNS for decoupling, Route 53 failover. The Dec 3 CourseMate deploy is your lab: for every resource Terraform creates, write one line in `aws-notes.md`: what it is, which domain it belongs to, and how it could fail. | CourseMate deploy done; `aws-notes.md` covers each resource; resilience practice set ≥ 75% |
-| ⬜ | Dec 7–13 | **Domain 3: high-performing (24%)** | Study caching (ElastiCache, CloudFront), choosing storage (S3 classes, EBS types), choosing databases (RDS vs. Aurora vs. DynamoDB), compute choices (EC2 vs. Fargate vs. Lambda). Hands-on: put a Lambda behind API Gateway that reads from DynamoDB, then delete it. | Lambda demo worked and was deleted; performance practice set ≥ 75% |
-| ⬜ | Dec 14–20 | **Domain 4: cost-optimized (20%)** | Study pricing models (On-Demand, Reserved, Savings Plans, Spot), S3 lifecycle rules, right-sizing, NAT gateway and data-transfer costs, AWS Cost Explorer. Hands-on: read your own bill from the Dec 3 project and explain each charge. | You can explain every line of your bill; cost practice set ≥ 75% |
-| ⬜ | Dec 21 – Jan 3 | **Review + full practice exams** | Take a full timed practice exam (65 questions, 130 minutes). For every wrong answer, write why the right answer is right in `scores.md`. Re-study the weakest domain. Take a second full practice exam. Use the official AWS practice question set on Skill Builder. | Two full practice exams at **80%+** |
-| ⬜ | Jan 4–16, 2027 | **Book and pass the exam** | Book through the AWS Certification site (Pearson VUE, online from home or at a Phoenix test center). After passing: add the badge to LinkedIn, the line "AWS Certified Solutions Architect – Associate" to resume F, B and D, and tell Claude so the job routine updates `experience_years.md`. | Certified |
-
 ### Optional (after the plan, only when a real job description asks for it)
 
 | Status | Project | Lang | Concept | Repo |
@@ -235,6 +208,33 @@ If a project slips, move everything after it; don't squeeze two into one day.
 | ⬜ | Fund-flow tracer | Python | blockchain forensics | |
 
 ---
+
+## After the roadmap: certification track: AWS Certified Solutions Architect – Associate (SAA-C03) (added Nov 20; **starts after the last roadmap project**, moved Nov 20 at Rawad's request)
+
+**Overview (read this first).**
+- **What it is:** an AWS exam that checks whether you can *design* systems on AWS: which services to pick and how to connect them so the system is secure, keeps running when something fails, is fast enough, and doesn't cost more than it should. It's multiple choice (65 questions, 130 minutes, $150, pass at 720 out of 1,000). No coding on the exam.
+- **Why:** AWS Training & Certification jobs (curriculum developer, technical instructor, Cloud Institute) ask for an AWS associate certification, and many solutions and AI-engineer posts list it. It also covers the "no cloud experience" gap in the job search.
+- **How we'll study:** about **45–60 minutes a day**, next to the projects, for six weeks, **after the roadmap is finished**. Each week covers one exam domain. You learn a topic, then **do it for real in the AWS console or with Terraform**, then answer practice questions on it. The "Ship CourseMate to AWS" project (Dec 3 in the plan) is the hands-on center: by then it is already built, so the cert weeks reuse it as the lab.
+- **How we'll test it:** practice questions each week (track your score per domain in a small `scores.md`), then two full timed practice exams. Book the real exam only when you score **80% or more twice in a row**.
+- **The four domains (exam weights):** Design Secure Architectures **30%**, Design Resilient Architectures **26%**, Design High-Performing Architectures **24%**, Design Cost-Optimized Architectures **20%**.
+- **New words:**
+  - **Region / Availability Zone (AZ):** a region is a geographic area (e.g. us-west-2, Oregon); each region has several AZs, separate data centers. "Multi-AZ" means a copy in a second data center so one failure doesn't take you down.
+  - **IAM:** Identity and Access Management: users, groups, **roles** (temporary permissions a service or person can take on) and **policies** (JSON documents that say who may do what).
+  - **VPC:** your private network inside AWS, split into **subnets** (public ones reach the internet; private ones don't). Security groups are firewalls on each resource.
+  - **EC2 / ECS Fargate / Lambda:** three ways to run code: a virtual machine you manage, a container AWS runs for you, and a function that runs only when called.
+  - **S3 / EBS / EFS:** object storage (files by key), a disk attached to one machine, a shared network file system.
+  - **RDS / Aurora / DynamoDB:** managed relational databases (Postgres, MySQL) and a managed key-value database.
+  - **Well-Architected Framework:** AWS's checklist of good design (security, reliability, performance, cost, operations, sustainability). The exam questions are built on it.
+- **Cost safety:** use a fresh AWS account with an **AWS Budgets alarm at $10** before you create anything, and delete what you build at the end of each session (`terraform destroy` or delete in the console).
+
+| Status | When | Step | What to do | Done when |
+|---|---|---|---|---|
+| ⬜ | Week 1 | **Setup + Domain 1: secure (30%)** | Create the AWS account, turn on MFA for the root user, create an admin IAM user, set the $10 budget alarm. Download the official SAA-C03 exam guide (AWS docs) and read the task list. Start the free exam-prep course on **AWS Skill Builder**. Study IAM (users, roles, policies, least privilege), KMS encryption, Secrets Manager, VPC security groups vs. network ACLs. Hands-on: write one IAM policy by hand that lets a role read only one S3 bucket, and test it. | Budget alarm on; IAM policy test works; first practice set on security ≥ 70% |
+| ⬜ | Week 2 | **Domain 2: resilient (26%)** | Study multi-AZ, Auto Scaling, load balancers (ALB), RDS Multi-AZ vs. read replicas, backups, SQS/SNS for decoupling, Route 53 failover. Redeploy CourseMate with your Terraform from the AWS project (then `terraform destroy`). For every resource Terraform creates, write one line in `aws-notes.md`: what it is, which domain it belongs to, and how it could fail. | CourseMate redeployed and destroyed; `aws-notes.md` covers each resource; resilience practice set ≥ 75% |
+| ⬜ | Week 3 | **Domain 3: high-performing (24%)** | Study caching (ElastiCache, CloudFront), choosing storage (S3 classes, EBS types), choosing databases (RDS vs. Aurora vs. DynamoDB), compute choices (EC2 vs. Fargate vs. Lambda). Hands-on: put a Lambda behind API Gateway that reads from DynamoDB, then delete it. | Lambda demo worked and was deleted; performance practice set ≥ 75% |
+| ⬜ | Week 4 | **Domain 4: cost-optimized (20%)** | Study pricing models (On-Demand, Reserved, Savings Plans, Spot), S3 lifecycle rules, right-sizing, NAT gateway and data-transfer costs, AWS Cost Explorer. Hands-on: read your own bill from the AWS deploy and explain each charge. | You can explain every line of your bill; cost practice set ≥ 75% |
+| ⬜ | Weeks 5–6 | **Review + full practice exams** | Take a full timed practice exam (65 questions, 130 minutes). For every wrong answer, write why the right answer is right in `scores.md`. Re-study the weakest domain. Take a second full practice exam. Use the official AWS practice question set on Skill Builder. | Two full practice exams at **80%+** |
+| ⬜ | Week 7 | **Book and pass the exam** | Book through the AWS Certification site (Pearson VUE, online from home or at a Phoenix test center). After passing: add the badge to LinkedIn, the line "AWS Certified Solutions Architect – Associate" to resume F, B and D, and tell Claude so the job routine updates `experience_years.md`. | Certified |
 
 ## Job track (runs alongside the projects, about 20–30 minutes a day)
 
