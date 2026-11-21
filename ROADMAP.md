@@ -158,7 +158,7 @@ If a project slips, move everything after it; don't squeeze two into one day.
 |---|---|---|---|---|---|---|
 | ✅ | Mon Nov 16 | CourseMate API + UI: **async** FastAPI with streaming responses (SSE), a minimal chat web page, conversation history; add **hosted providers (Anthropic and OpenAI APIs)** behind the existing `LLMClient`, next to Ollama, and compare cost and latency | Python + HTML/TS | serving LLM apps, async Python, streaming, sessions, multi-provider LLM APIs | testing a web page with Claude in a browser | [coursemate](https://github.com/Syriacode/coursemate) (PR #2: SSE API, chat page, sessions, Ollama + OpenAI + Anthropic formats tested for $0, compare; Step 10 still to finish: README, INTERVIEW, CI web smoke test, `evals/runs/compare-local.txt`) |
 | ✅ | Wed Nov 18 | **AI basics lab 2: tool calling and agents from scratch.** What "tool calling" really is (the model writes JSON, your code runs the tool), then a ~40-line agent loop with two tools and no framework; print every message so the loop is visible | Python | tool use, the agent loop, stopping conditions | watch Claude Code's own agent loop (transcript view, `Ctrl+O`) and compare it with mine | [ai-basics](https://github.com/Syriacode/ai-basics) (PR #1: tool calling by hand and through the API, a 40-line agent loop, Parts A–D on the real model, CI runs both notebooks; to do: fill in the "What I learned" cells, merge) |
-| ⬜ | Fri Nov 20 | CourseMate agent: tools to search notes, generate a quiz and draft an announcement; **a human approves anything that gets sent**; agent evals | Python | tool use, human-in-the-loop, agent evals | Claude Agent SDK | |
+| ✅ | Fri Nov 20 | CourseMate agent: tools to search notes, generate a quiz and draft an announcement; **a human approves anything that gets sent**; agent evals | Python | tool use, human-in-the-loop, agent evals | Claude Agent SDK | [coursemate](https://github.com/Syriacode/coursemate) (branch `agent`, includes the Nov 16 docs: four tools, approval gate in `run_tool`, 8 agent evals, `qwen2.5:3b` 3/8 with 0 unapproved sends, same agent on the Agent SDK; to do: fill in the SDK comparison table, widen the `not-in-notes` rule, try one prompt fix for "drafted, said it would send, stopped", ASCII arrow for Windows consoles, merge) |
 | ⬜ | Sun Nov 22 | CourseMate MCP server: expose the course tools over MCP and use them from Claude Code | Python | MCP, integrating AI with internal systems | **build your own MCP server** (`claude mcp add`) | |
 
 ### Phase 3 (Nov 24 – Dec 5): Production AI + fintech backend
@@ -409,3 +409,10 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
     with side effects), and test with a real model too: a scripted fake only proves the cases you thought of, and the
     real `qwen2.5:3b` found one nobody scripted (an empty reply with no tool calls, accepted as the final answer).
     (Phase 2 Wed)
+19. **Put the safety rule in code, then prove it with a test that breaks it.** A prompt asks; a gate decides. Keep
+    every action with side effects behind one check in the code that runs tools (`run_tool`, or `can_use_tool` in the
+    Agent SDK), make the default "no", and keep a number in your evals that must always be 0 (unapproved sends). Then
+    remove the gate on purpose once and watch that number move, because a 0 can also mean the model never tried (as
+    `qwen2.5:3b` didn't). When you script Claude Code (Agent SDK or `claude -p`), start locked down: `tools=[]` or a
+    short list, `setting_sources=[]` so your personal allow-rules don't leak in, only read tools in `allowed_tools`,
+    and check `ANTHROPIC_API_KEY` is unset so the run uses your plan, not the API. (Phase 2 Fri)
