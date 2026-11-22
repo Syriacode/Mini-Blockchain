@@ -196,6 +196,32 @@ If a project slips, move everything after it; don't squeeze two into one day.
 | ⬜ | Mon Dec 21 | **LangGraph:** rebuild the CourseMate agent as a LangGraph graph (state, retries, a human-approval interrupt) and compare it with the Agent SDK version on the same agent evals | Python | agent frameworks, stateful orchestration | **parallel subagents** (one per version) | `coursemate` (branch) |
 | ⬜ | Wed Dec 23 | **Kubernetes basics:** run the Go payments ledger + Postgres on a local `kind` cluster with health probes, config and secrets, and a rollout | Go + YAML | containers at scale, probes, rollouts | reviewing YAML with a custom subagent | `payments-ledger` (branch) |
 
+### Phase 6 (Dec 27 – Jan 6): full-stack and enterprise-backend gaps (added Nov 22 from job-posting data)
+
+**Overview (read this first).** A count over 120 job postings and 206 skip notes (Nov 22) showed which skills keep blocking
+applications after Phases 1–5: **front-end frameworks** (React, Angular; Fidelity, Ripple, Ondo, MongoDB asked for them),
+**Java + Spring Boot** (6 skips), **event-driven systems** with Kafka and Redis ("distributed systems" appears in 17
+postings), **login systems** (OAuth / single sign-on, 4 skips) and **MongoDB** (Rawad asked for it; it also appears in
+data-platform jobs). Rawad has built things in React, Angular and Vue before; these projects give him **public repos that
+prove it** and connect each framework to the AI and fintech projects already on the map. Same rhythm: each project uses
+two days (Part A, Part B). The AWS certification track starts after this phase.
+
+New words for this phase:
+- **React / Angular / Vue:** the three most-used JavaScript front-end frameworks. React is a library of components and hooks; Angular is a full framework from Google with TypeScript, services and dependency injection built in; Vue sits between them.
+- **OAuth 2.0 / OpenID Connect (OIDC) / SSO:** the standard way to "log in with GitHub/Google": the app never sees the password, it gets a token from the identity provider. SSO (single sign-on) is one login for many apps, common in companies.
+- **Spring Boot:** the most common Java framework for backend services (REST APIs, database access with JPA, configuration).
+- **MongoDB:** a document database: it stores JSON-like documents instead of table rows; good for flexible records such as audit logs and chat history.
+- **Kafka / Redpanda:** an event log: services publish events ("transfer completed") and other services read them later, at their own pace. Redpanda is a Kafka-compatible version that runs easily in Docker.
+- **Redis:** an in-memory key-value store used for caching, rate limits and idempotency keys.
+
+| Status | When | Project | Lang | Concept | Claude Code technique | Repo |
+|---|---|---|---|---|---|---|
+| ⬜ | Sun Dec 27 | **CourseMate web app in React + TypeScript:** replace the minimal chat page with a React app (Vite): streaming answers, a citations side panel, conversation list; **"Log in with GitHub" (OAuth 2.0 / OIDC)** in front of the API; Vitest unit tests and one Playwright end-to-end test in CI | TypeScript + React | React components and hooks, calling a streaming API, OAuth login flow, front-end testing | testing the UI with Claude in a browser; **screenshots** to Claude for UI bugs | `coursemate` (folder `web/`) |
+| ⬜ | Tue Dec 29 | **Agent approval dashboard in Angular:** the queue where a human approves or rejects the CourseMate agent's drafts (from the Nov 20 project): list, detail view, approve/reject, audit trail; Angular services + RxJS; reuse the GitHub login; Jest/Karma tests. Bonus (2 hours): the same approve button as a small **Vue** widget, to compare the three frameworks in the README | TypeScript + Angular (+ Vue) | Angular modules, services, dependency injection, RxJS; framework comparison | **plan mode** for a framework you have not used in a while | `coursemate` (folder `admin/`) |
+| ⬜ | Thu Dec 31 | **Payments ledger in Java + Spring Boot:** port the core of the Go ledger (accounts, double-entry transfers, idempotency keys) to Spring Boot with JPA on Postgres; write an **audit log of every request to MongoDB**; JUnit 5 + **Testcontainers** (real Postgres and Mongo in tests); compare with the Go version in the README | Java + Spring Boot + MongoDB | Spring Boot REST, JPA/transactions, document vs. relational storage | **custom subagent** that reviews Java for transaction bugs | new repo `ledger-spring` |
+| ⬜ | Sat Jan 2 | **Event-driven ledger: Kafka + Redis:** the ledger publishes `TransferCompleted` events to **Redpanda (Kafka API)**; the Go reserve service (Dec 11) consumes them; **Redis** holds idempotency keys and a rate limit; show at-least-once delivery, retries and a dead-letter topic; docker-compose for everything | Go + Java + Docker | distributed systems: events, consumers, retries, idempotency | **parallel subagents** (producer side, consumer side) | `ledger-spring` + `payments-ledger` (branches) |
+| ⬜ | Mon Jan 4 | **Full-stack capstone + resume update:** one README and 3-minute demo of the whole system (React app → API → ledger → events → reserve service → AI ops agent); update resumes B and D with only what is now built: React, Angular, Vue, OAuth/OIDC, Spring Boot, MongoDB, Kafka, Redis | all | presenting a full-stack system end to end | `/code-review` across repos | — |
+
 ### Optional (after the plan, only when a real job description asks for it)
 
 | Status | Project | Lang | Concept | Repo |
@@ -269,6 +295,12 @@ study, about 30–40 tailored applications sent, and a practiced interview loop.
 ---
 
 ## Skills in demand (updated Nov 14, 2026)
+
+**Nov 22 update (from Rawad's own job search: 120 postings read, 206 skip notes).** The skills that most often blocked an
+application: AI agents in production (17 skips; covered by Phases 2–3), AWS / cloud (17; Dec 3 project + AWS cert track),
+Go at expert level (15; ledger and reserve service), Kubernetes (13; Dec 23), React / front-end framework (9; Phase 6),
+Java and Spring Boot (9 and 6; Phase 6), Rust (5; Dec 17), MCP (5; Nov 22), Kafka / distributed systems (Phase 6),
+OAuth / SSO (4; Phase 6). MongoDB appeared in only 1 posting of 120 but is in Phase 6 at Rawad's request (audit log).
 
 Where the plan comes from. Two sources: the job descriptions the job-search agent reads every day (logged in
 `Syriacode/job-search/skills_demand.csv`, summarized in Friday's digest), and published counts across many postings.
