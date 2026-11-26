@@ -17,15 +17,17 @@ roles, and become fluent in Claude Code along the way.
 3. Fintech backend (Go, payments, ledgers)
 4. Blockchain / stablecoin engineering, e.g. Coinbase's *Senior Software Engineer, Stablecoins*
 
-**Path:** Week 1 (blockchain refresh) is done. Then (Nov 9 – Dec 23, 2026): AI foundations with two AI basics
-labs, production AI and the Go ledger, then the blockchain lane and interview prep, then Phase 5 (added Nov 14) to
-close the skill gaps that job postings ask for most (hosted LLM APIs and AWS, LangGraph, Rust/Solana, a live L2
-deploy, Kubernetes basics). See "Skills in demand" below. A job track runs alongside, so
+**Path:** Week 1 (blockchain refresh) is done. Then (Nov 9 – Dec 22, 2026): AI foundations with two AI basics
+labs, production AI and the Go ledger, then the blockchain lane, then Phase 5 (a live L2 deploy, LangGraph) and
+Phase 6 (React, Java + Spring Boot, Kafka + Redis) to close the skill gaps that job postings ask for most. (Cut on
+Nov 26 to protect time for the job search: Rust/Solana, Angular + Vue, Kubernetes, the stablecoin ops agent and the
+full-stack capstone moved to Optional.) See "Skills in demand" below. A job track runs alongside, so
 applications start now.
 
-**Rhythm (changed Nov 20):** **one project every two days, about 4–5 hours in total**, done as **two sessions**
-(Part A on day 1, Part B on day 2). Projects really take 4+ hours, so the old "1.5–2 hours" estimate is gone and no
-project is cut. Re-reading the overview and answering the "Check your understanding" questions now happens at the
+**Rhythm (changed Nov 20, again Nov 26):** **one project every two days, about 4–5 hours in total**, done as **two
+sessions** (Part A on day 1, Part B on day 2). On Nov 26 the guides had grown to 10+ real hours per project (the
+observability guide: 12 steps, 1,400+ lines), so guides now have a hard size cap (see "Size" in the rules) and the
+plan has 13 projects instead of 19. Re-reading the overview and answering the "Check your understanding" questions now happens at the
 start of day 2, before Part B. Quality over quantity. Each project gets **its own chat**, and usually its own GitHub repo
 (projects that improve CourseMate or the triage CLI happen on a branch of that repo).
 
@@ -95,8 +97,13 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
   about and why it matters; what we'll build (the parts and how they fit, with a small diagram); how we'll test it;
   a short definition of every new tool, technology or term used; and, when the project builds on an earlier one,
   a plain-language recap of what that earlier project built.
-- **Size (changed Nov 20):** a project is **about 4–5 hours** of hands-on time, split into **Part A (day 1, about
-  2–2.5 hours)** and **Part B (day 2, about 2–2.5 hours)**. Part A must end at a working, tested, committed checkpoint
+- **Size (changed Nov 20; hard cap added Nov 26):** a project is **about 4–5 hours of Rawad's real time**, split into
+  **Part A (day 1, about 2–2.5 hours)** and **Part B (day 2, about 2–2.5 hours)**. Real time is about **twice** what it
+  takes to type the commands, so estimate each step that way. Hard cap per guide: **6 steps (3 per part), about 700
+  lines, one hand-typed function**, and **one new big idea or tool per project** (never new infrastructure plus
+  several new ideas at once). Nice-to-have parts (live tests, extra dashboards, thought experiments) are marked
+  **"Optional: skip if you're over time"**. If a guide doesn't fit, cut scope, not explanation: the overview, the
+  re-explained basics, exact commands and "What you should see" all stay. Part A must end at a working, tested, committed checkpoint
   (state it in the guide: "Stop here. Part A is done when …"). Part B adds the rest (evals, README, INTERVIEW). One
   project every two days.
 - **Verify before handing over:** build and test a reference solution privately so every command in the guide works.
@@ -134,13 +141,15 @@ Today's project: <write the project name from the roadmap here, e.g. "Week 1 Mon
 | ✅ | Fri | Token balance script | TypeScript | ERC-20 reads, events, viem | **hooks** (auto-format on edit) | [token-balance-script](https://github.com/Syriacode/token-balance-script) |
 | ✅ | Weekend | Deploy and verify a token on Base Sepolia (built, tested and reviewed; live deploy skipped, see note) | Solidity | test wallets, faucets, Basescan verification | secrets safety (deny `.env`), `/code-review` | [base-sepolia-token](https://github.com/Syriacode/base-sepolia-token) |
 
-## Plan: Nov 9 – Dec 15, 2026, one project every other day
+## Plan: Nov 9 – Dec 22, 2026, one project every other day
 
 Changed on Nov 11: the sprint was one project a day, which went too fast to understand the AI basics. Now there's a
 project every other day, a reading day in between, and two **AI basics labs** before the bigger AI projects.
 Changed on Nov 20: projects take 4–5 hours, so each project now uses both of its two days (Part A and Part B). All
 projects stay. The dates below are each project's **start day**; it finishes the next day.
 If a project slips, move everything after it; don't squeeze two into one day.
+Changed on Nov 26: guides get a hard size cap (rules: "Size"), and six projects were cut or merged (13 instead of 19)
+so the plan ends Dec 22 instead of Jan 4. The cut ones keep their full description in the Optional table.
 
 ### Phase 1 (Nov 9–15): AI foundations — CourseMate v1 (AI lane)
 
@@ -165,38 +174,34 @@ If a project slips, move everything after it; don't squeeze two into one day.
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Tue Nov 24 | Observability for CourseMate: traces per request (prompt, retrieved chunks, tool calls) with **Langfuse** (self-hosted in Docker) and **OpenTelemetry**, latency and cost per answer, a small dashboard; add caching | Python | LLMOps: tracing, cost and latency budgets, caching | **sessions**: `--continue`, `/resume` | |
+| 🟡 | Tue Nov 24 | Observability for CourseMate: traces per request (prompt, retrieved chunks, tool calls) with **Langfuse** (self-hosted in Docker) and **OpenTelemetry**, latency and cost per answer, a small dashboard; add caching | Python | LLMOps: tracing, cost and latency budgets, caching | **sessions**: `--continue`, `/resume` | [coursemate](https://github.com/Syriacode/coursemate) (branch `observability`; Part A done carefully, Steps 7–11 rushed for time (cache, stats, real run, docs): to do: say "done" for a review, then re-read Steps 7–9 with "Check your understanding" on a reading day) |
 | — | Thu Nov 26 | Thanksgiving: no project. | | | | |
-| ⬜ | Fri Nov 27 | Guardrails and prompt-injection lab: poison notes and tool results, watch CourseMate misbehave, add defenses and output validation, one test per attack | Python | AI security: injection, data leaks, tool misuse | safe handling of untrusted content (plan mode + deny rules) | |
+| ⬜ | Fri Nov 27 | Guardrails and prompt-injection lab (first guide with the Nov 26 size cap: about 4 attacks and 4 defenses): poison notes and tool results, watch CourseMate misbehave, add defenses and output validation, one test per attack | Python | AI security: injection, data leaks, tool misuse | safe handling of untrusted content (plan mode + deny rules) | |
 | ⬜ | Sun Nov 29 | Payments ledger API: double-entry ledger, idempotency keys, Postgres | Go | payment correctness, exactly-once transfers | **MCP server** (connect Claude Code to Postgres) | |
-| ⬜ | Tue Dec 1 | Forward-deployed sprint: a "customer" hands me a messy invoice CSV and a half-documented API; clean it, load it into my ledger, LLM categorizes line items with evals, deployment note for their team | Python + Go | data cleaning, integration, AI in a real workflow, customer communication | **have Claude interview me** about requirements before it plans | |
+| ⬜ | Tue Dec 1 | Forward-deployed sprint (kept small: one CSV, one categorization eval, one deployment note): a "customer" hands me a messy invoice CSV and a half-documented API; clean it, load it into my ledger, LLM categorizes line items with evals, deployment note for their team | Python + Go | data cleaning, integration, AI in a real workflow, customer communication | **have Claude interview me** about requirements before it plans | |
 | ⬜ | Thu Dec 3 | Ship CourseMate **to AWS**: one-command deploy with Terraform (container on ECS Fargate or App Runner, Postgres with pgvector, secrets in AWS Secrets Manager, a hosted model through **Amazon Bedrock**), health check, eval gate in CI before a release, an **AWS budget alarm**, and `terraform destroy` when done. Keep the local Docker setup as the free fallback. **Later reused as the lab for the AWS certification track (after the roadmap).** | Terraform + Docker + AWS | IaC, cloud deployment, CI/CD for LLM apps, cost control | **headless `claude -p` in CI** (review a `terraform plan`) | |
 | ⬜ | Sat Dec 5 | **AI capstone: CourseMate case study.** Polish, an eval and latency report, architecture diagram, case-study README ("problem → design → results → what I'd do next"), 3-minute demo video (it runs locally) | all | presenting an AI product end to end | **plugins**: package my kit for reuse | |
 
-### Phase 4 (Dec 7–15): Blockchain + fintech lane, interview prep
+### Phase 4 (Dec 7–12): Blockchain + fintech lane
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Mon Dec 7 | Gasless approvals (EIP-2612 permit) | Solidity | signatures, EIP-712, replay protection | debugging: `-vvvv` traces, screenshots | |
-| ⬜ | Wed Dec 9 | Yield vault (ERC-4626) | Solidity | share accounting, rounding attacks | **context**: `/context`, `/compact`, `/clear` | |
-| ⬜ | Fri Dec 11 | Stablecoin reserve service: watch mint/burn events, reconcile supply vs. reserves, alert on drift | Go | proof of reserves, reconciliation | **parallel subagents** (one per component) | |
-| ⬜ | Sun Dec 13 | Security day: break it, fix it (2 vulnerable contracts) + Slither/Aderyn on all my contracts + a short audit report | Solidity + Markdown | real attack types, automated auditing | **parallel sessions** (worktrees), `claude -p` | |
-| ⬜ | Tue Dec 15 | **Bridge project:** stablecoin ops agent. Reuse the CourseMate agent pattern: it reads the reserve service and ledger, explains drift alerts, drafts an incident report, human approves. Then a **mock interview loop** (see Job track). | Python + Go | applying the AI lane to fintech/blockchain | custom subagent as an **interviewer** that grills me on my repos | |
+| ⬜ | Mon Dec 7 | **Permit + yield vault** (merged Nov 26): an ERC-4626 vault whose deposits use gasless approvals (EIP-2612 permit) | Solidity | signatures, EIP-712, replay protection; share accounting, rounding attacks | debugging: `-vvvv` traces; **context**: `/context`, `/compact`, `/clear` | |
+| ⬜ | Wed Dec 9 | Stablecoin reserve service: watch mint/burn events, reconcile supply vs. reserves, alert on drift | Go | proof of reserves, reconciliation | **parallel subagents** (one per component) | |
+| ⬜ | Fri Dec 11 | Security day: break it, fix it (2 vulnerable contracts) + Slither/Aderyn on all my contracts + a short audit report | Solidity + Markdown | real attack types, automated auditing | **parallel sessions** (worktrees), `claude -p` | |
 
 > **Note (Week 1 Weekend):** PlayToken was not deployed to Base Sepolia. Nothing in the plan needs Base Sepolia now;
 > the Phase 4 projects run on a local Anvil chain. (Update Nov 14: a live L2 deploy is now in Phase 5, because job
 > posts ask for at least one real deployment on an L2.)
 
-### Phase 5 (Dec 17–23): close the most-requested gaps (added Nov 14 from job-posting data)
+### Phase 5 (Dec 13–16): close the most-requested gaps (added Nov 14 from job-posting data; cut Nov 26)
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Thu Dec 17 | **Rust + Solana:** Rust basics, then a small Anchor program (a vault: deposit, withdraw, PDA accounts) with tests on a local validator | Rust | Rust ownership and errors, Solana accounts model vs. EVM storage | learning a second new language with Claude (compare with the Go day) | new repo `solana-vault` |
-| ⬜ | Sat Dec 19 | **Live L2 deploy:** deploy and verify PlayToken and the upgradeable stablecoin (proxy + implementation) on Base Sepolia with a fresh test wallet, then do one upgrade on-chain; record addresses and Basescan links in the READMEs | Solidity | real deployment, verification, proxy upgrades on a live chain | secrets safety again: keystore in a separate shell, deny rules | `base-sepolia-token`, `upgradeable-stablecoin` |
-| ⬜ | Mon Dec 21 | **LangGraph:** rebuild the CourseMate agent as a LangGraph graph (state, retries, a human-approval interrupt) and compare it with the Agent SDK version on the same agent evals | Python | agent frameworks, stateful orchestration | **parallel subagents** (one per version) | `coursemate` (branch) |
-| ⬜ | Wed Dec 23 | **Kubernetes basics:** run the Go payments ledger + Postgres on a local `kind` cluster with health probes, config and secrets, and a rollout | Go + YAML | containers at scale, probes, rollouts | reviewing YAML with a custom subagent | `payments-ledger` (branch) |
+| ⬜ | Sun Dec 13 | **Live L2 deploy:** deploy and verify PlayToken and the upgradeable stablecoin (proxy + implementation) on Base Sepolia with a fresh test wallet, then do one upgrade on-chain; record addresses and Basescan links in the READMEs | Solidity | real deployment, verification, proxy upgrades on a live chain | secrets safety again: keystore in a separate shell, deny rules | `base-sepolia-token`, `upgradeable-stablecoin` |
+| ⬜ | Tue Dec 15 | **LangGraph:** rebuild the CourseMate agent as a LangGraph graph (state, retries, a human-approval interrupt) and compare it with the Agent SDK version on the same agent evals | Python | agent frameworks, stateful orchestration | **parallel subagents** (one per version) | `coursemate` (branch) |
 
-### Phase 6 (Dec 27 – Jan 6): full-stack and enterprise-backend gaps (added Nov 22 from job-posting data)
+### Phase 6 (Dec 17–22): full-stack and enterprise-backend gaps (added Nov 22 from job-posting data; cut Nov 26)
 
 **Overview (read this first).** A count over 120 job postings and 206 skip notes (Nov 22) showed which skills keep blocking
 applications after Phases 1–5: **front-end frameworks** (React, Angular; Fidelity, Ripple, Ondo, MongoDB asked for them),
@@ -204,7 +209,9 @@ applications after Phases 1–5: **front-end frameworks** (React, Angular; Fidel
 postings), **login systems** (OAuth / single sign-on, 4 skips) and **MongoDB** (Rawad asked for it; it also appears in
 data-platform jobs). Rawad has built things in React, Angular and Vue before; these projects give him **public repos that
 prove it** and connect each framework to the AI and fintech projects already on the map. Same rhythm: each project uses
-two days (Part A, Part B). The AWS certification track starts after this phase.
+two days (Part A, Part B). The AWS certification track starts after this phase. (Nov 26: the Angular dashboard + Vue
+widget and the full-stack capstone moved to Optional to protect job-search time; the resume update is now a job-track
+task on Dec 23.)
 
 New words for this phase:
 - **React / Angular / Vue:** the three most-used JavaScript front-end frameworks. React is a library of components and hooks; Angular is a full framework from Google with TypeScript, services and dependency injection built in; Vue sits between them.
@@ -216,11 +223,9 @@ New words for this phase:
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| ⬜ | Sun Dec 27 | **CourseMate web app in React + TypeScript:** replace the minimal chat page with a React app (Vite): streaming answers, a citations side panel, conversation list; **"Log in with GitHub" (OAuth 2.0 / OIDC)** in front of the API; Vitest unit tests and one Playwright end-to-end test in CI | TypeScript + React | React components and hooks, calling a streaming API, OAuth login flow, front-end testing | testing the UI with Claude in a browser; **screenshots** to Claude for UI bugs | `coursemate` (folder `web/`) |
-| ⬜ | Tue Dec 29 | **Agent approval dashboard in Angular:** the queue where a human approves or rejects the CourseMate agent's drafts (from the Nov 20 project): list, detail view, approve/reject, audit trail; Angular services + RxJS; reuse the GitHub login; Jest/Karma tests. Bonus (2 hours): the same approve button as a small **Vue** widget, to compare the three frameworks in the README | TypeScript + Angular (+ Vue) | Angular modules, services, dependency injection, RxJS; framework comparison | **plan mode** for a framework you have not used in a while | `coursemate` (folder `admin/`) |
-| ⬜ | Thu Dec 31 | **Payments ledger in Java + Spring Boot:** port the core of the Go ledger (accounts, double-entry transfers, idempotency keys) to Spring Boot with JPA on Postgres; write an **audit log of every request to MongoDB**; JUnit 5 + **Testcontainers** (real Postgres and Mongo in tests); compare with the Go version in the README | Java + Spring Boot + MongoDB | Spring Boot REST, JPA/transactions, document vs. relational storage | **custom subagent** that reviews Java for transaction bugs | new repo `ledger-spring` |
-| ⬜ | Sat Jan 2 | **Event-driven ledger: Kafka + Redis:** the ledger publishes `TransferCompleted` events to **Redpanda (Kafka API)**; the Go reserve service (Dec 11) consumes them; **Redis** holds idempotency keys and a rate limit; show at-least-once delivery, retries and a dead-letter topic; docker-compose for everything | Go + Java + Docker | distributed systems: events, consumers, retries, idempotency | **parallel subagents** (producer side, consumer side) | `ledger-spring` + `payments-ledger` (branches) |
-| ⬜ | Mon Jan 4 | **Full-stack capstone + resume update:** one README and 3-minute demo of the whole system (React app → API → ledger → events → reserve service → AI ops agent); update resumes B and D with only what is now built: React, Angular, Vue, OAuth/OIDC, Spring Boot, MongoDB, Kafka, Redis | all | presenting a full-stack system end to end | `/code-review` across repos | — |
+| ⬜ | Thu Dec 17 | **CourseMate web app in React + TypeScript:** replace the minimal chat page with a React app (Vite): streaming answers, a citations side panel, conversation list; **"Log in with GitHub" (OAuth 2.0 / OIDC)** in front of the API; Vitest unit tests and one Playwright end-to-end test in CI | TypeScript + React | React components and hooks, calling a streaming API, OAuth login flow, front-end testing | testing the UI with Claude in a browser; **screenshots** to Claude for UI bugs | `coursemate` (folder `web/`) |
+| ⬜ | Sat Dec 19 | **Payments ledger in Java + Spring Boot:** port the core of the Go ledger (accounts, double-entry transfers, idempotency keys) to Spring Boot with JPA on Postgres; write an **audit log of every request to MongoDB**; JUnit 5 + **Testcontainers** (real Postgres and Mongo in tests); compare with the Go version in the README | Java + Spring Boot + MongoDB | Spring Boot REST, JPA/transactions, document vs. relational storage | **custom subagent** that reviews Java for transaction bugs | new repo `ledger-spring` |
+| ⬜ | Mon Dec 21 | **Event-driven ledger: Kafka + Redis:** the ledger publishes `TransferCompleted` events to **Redpanda (Kafka API)**; the Go reserve service (Dec 9) consumes them; **Redis** holds idempotency keys and a rate limit; show at-least-once delivery, retries and a dead-letter topic; docker-compose for everything | Go + Java + Docker | distributed systems: events, consumers, retries, idempotency | **parallel subagents** (producer side, consumer side); `/code-review` across repos | `ledger-spring` + `payments-ledger` (branches) |
 
 ### Optional (after the plan, only when a real job description asks for it)
 
@@ -228,7 +233,12 @@ New words for this phase:
 |---|---|---|---|---|
 | ⬜ | Reranking for CourseMate: rerank the top 20 hybrid candidates with a small cross-encoder or the local LLM, and prove it with the Nov 12 retrieval eval (recall@k, MRR) and latency | Python | reranking, quality vs. latency | |
 | ⬜ | Fine-tune a small open model (LoRA) on question-triage data and compare it with prompting, using the Week 2 evals. **Do this next if the job-search skills log keeps showing fine-tuning or PyTorch** (15–33% of AI engineer posts in Nov 2026 surveys). | Python | fine-tuning vs. prompting, cost/quality trade-offs (free with a Google Colab GPU, if available) | |
-| ↗ moved | Multi-agent workflow with a framework: moved to Phase 5 (Dec 21, LangGraph) | Python | orchestration, state, retries | |
+| ↗ moved | Multi-agent workflow with a framework: moved to Phase 5 (Dec 15, LangGraph) | Python | orchestration, state, retries | |
+| ⬜ | **Rust + Solana** (cut from Phase 5 on Nov 26): Rust basics, then a small Anchor program (a vault: deposit, withdraw, PDA accounts) with tests on a local validator. Bring back if Solana/Rust jobs keep showing up. | Rust | Rust ownership and errors, Solana accounts model vs. EVM storage | new repo `solana-vault` |
+| ⬜ | **Kubernetes basics** (cut from Phase 5 on Nov 26): run the Go payments ledger + Postgres on a local `kind` cluster with health probes, config and secrets, and a rollout | Go + YAML | containers at scale, probes, rollouts | `payments-ledger` (branch) |
+| ⬜ | **Stablecoin ops agent** (cut from Phase 4 on Nov 26): reuse the CourseMate agent pattern on the reserve service and ledger: explain drift alerts, draft an incident report, human approves | Python + Go | applying the AI lane to fintech/blockchain | |
+| ⬜ | **Agent approval dashboard in Angular** (+ a small **Vue** widget) (cut from Phase 6 on Nov 26): approve/reject the CourseMate agent's drafts, audit trail, Angular services + RxJS, GitHub login. Bring back first if an application needs Angular. | TypeScript + Angular (+ Vue) | Angular DI, RxJS; framework comparison | `coursemate` (folder `admin/`) |
+| ⬜ | **Full-stack capstone** (cut from Phase 6 on Nov 26): one README and a 3-minute demo of React app → API → ledger → events → reserve service | all | presenting a full-stack system end to end | — |
 | ⬜ | Merkle airdrop | Solidity + TS | Merkle proofs | |
 | ⬜ | Reserve service, Transfer event indexer (optional) | Go | event logs, indexing, reorgs | |
 | ⬜ | Mini dApp front end | TypeScript | wallet connection | |
@@ -287,7 +297,8 @@ Aim for about **70% AI applications, 30% blockchain/fintech**.
 | ⬜ | Nov 23 – Dec 5 (daily) | **1–2 applications a day** + **30 minutes of Python coding practice** (arrays, hashing, two pointers, BFS/DFS: AI engineer loops still include a coding round). |
 | ⬜ | Dec 5–6 | Publish the CourseMate demo video + a LinkedIn post. Practice 2 **LLM system design** questions out loud (from my `INTERVIEW.md` files). |
 | ⬜ | Dec 7–15 (daily) | **1–2 applications a day**, follow up on earlier ones, reach out to 1 person a day at target companies (alumni, ex-students, conference contacts). |
-| ⬜ | Dec 15 | Mock interview loop: one coding round, one LLM system design, one behavioral (5 STAR stories), one "walk me through your repo". Turn one `GUIDE.md` into a public tutorial (DevRel writing sample). |
+| ⬜ | Dec 15 | Mock interview loop: one coding round, one LLM system design, one behavioral (5 STAR stories), one "walk me through your repo" (use a custom Claude Code subagent as the **interviewer** that grills me on my repos; this technique came from the cut stablecoin ops agent project). Turn one `GUIDE.md` into a public tutorial (DevRel writing sample). |
+| ⬜ | Dec 23 | Resume update (about 1 hour; from the cut full-stack capstone): add only what is now built (React, OAuth/OIDC, Spring Boot, MongoDB, Kafka, Redis) to the right resume versions. |
 
 **Target by Dec 15:** resume A that reads as a real AI engineer, a recorded CourseMate demo with evals and a case
 study, about 30–40 tailored applications sent, and a practiced interview loop.
@@ -298,8 +309,8 @@ study, about 30–40 tailored applications sent, and a practiced interview loop.
 
 **Nov 22 update (from Rawad's own job search: 120 postings read, 206 skip notes).** The skills that most often blocked an
 application: AI agents in production (17 skips; covered by Phases 2–3), AWS / cloud (17; Dec 3 project + AWS cert track),
-Go at expert level (15; ledger and reserve service), Kubernetes (13; Dec 23), React / front-end framework (9; Phase 6),
-Java and Spring Boot (9 and 6; Phase 6), Rust (5; Dec 17), MCP (5; Nov 22), Kafka / distributed systems (Phase 6),
+Go at expert level (15; ledger and reserve service), Kubernetes (13; Optional since Nov 26), React / front-end framework (9; Phase 6),
+Java and Spring Boot (9 and 6; Phase 6), Rust (5; Optional since Nov 26), MCP (5; Nov 22), Kafka / distributed systems (Phase 6),
 OAuth / SSO (4; Phase 6). MongoDB appeared in only 1 posting of 120 but is in Phase 6 at Rawad's request (audit log).
 
 Where the plan comes from. Two sources: the job descriptions the job-search agent reads every day (logged in
