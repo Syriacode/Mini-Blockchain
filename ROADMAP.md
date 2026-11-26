@@ -174,7 +174,7 @@ so the plan ends Dec 22 instead of Jan 4. The cut ones keep their full descripti
 
 | Status | When | Project | Lang | Concept | Claude Code technique | Repo |
 |---|---|---|---|---|---|---|
-| 🟡 | Tue Nov 24 | Observability for CourseMate: traces per request (prompt, retrieved chunks, tool calls) with **Langfuse** (self-hosted in Docker) and **OpenTelemetry**, latency and cost per answer, a small dashboard; add caching | Python | LLMOps: tracing, cost and latency budgets, caching | **sessions**: `--continue`, `/resume` | [coursemate](https://github.com/Syriacode/coursemate) (branch `observability`; Part A done carefully, Steps 7–11 rushed for time (cache, stats, real run, docs): to do: say "done" for a review, then re-read Steps 7–9 with "Check your understanding" on a reading day) |
+| ✅ | Tue Nov 24 | Observability for CourseMate: traces per request (prompt, retrieved chunks, tool calls) with **Langfuse** (self-hosted in Docker) and **OpenTelemetry**, latency and cost per answer, a small dashboard; add caching | Python | LLMOps: tracing, cost and latency budgets, caching | **sessions**: `--continue`, `/resume` | [coursemate](https://github.com/Syriacode/coursemate) (branch `observability`: OpenTelemetry spans for every answer (`chat` → `retrieve`, `llm`, `check`) and agent run, sent to self-hosted Langfuse and a JSONL span log; an exact-match response cache (TTL + LRU); `bench` and `stats` with p95/cost budgets and an HTML dashboard; 296 tests; `qwen2.5:3b`: not cached p50 11.2 s / p95 13.0 s, first token p50 6.8 s, cached p50 76 ms, 50% hit rate, both budgets OK; to do: fill in "What I'd improve first" in the README, merge `mcp` into `main` before (or with) this PR, re-read Steps 7–9 with "Check your understanding" on a reading day) |
 | — | Thu Nov 26 | Thanksgiving: no project. | | | | |
 | ⬜ | Fri Nov 27 | Guardrails and prompt-injection lab (first guide with the Nov 26 size cap: about 4 attacks and 4 defenses): poison notes and tool results, watch CourseMate misbehave, add defenses and output validation, one test per attack | Python | AI security: injection, data leaks, tool misuse | safe handling of untrusted content (plan mode + deny rules) | |
 | ⬜ | Sun Nov 29 | Payments ledger API: double-entry ledger, idempotency keys, Postgres | Go | payment correctness, exactly-once transfers | **MCP server** (connect Claude Code to Postgres) | |
@@ -467,3 +467,10 @@ AI engineer or forward deployed engineer job descriptions). None of these depend
     approval. But a server can't see who clicked yes in the client, so anything with side effects checks a yes the
     model can't give (your own terminal today, a login tomorrow). Never print to stdout in a stdio server, and keep
     one real stdio test in CI, because in-memory tests never touch stdout. (Phase 2 Sun)
+21. **Name a session per task, stop at a commit, and resume instead of re-explaining.** Start with `claude -n <task>`
+    (or `/rename`), end each day at a committed checkpoint with a short "where we are" note from Claude, and come back
+    with `claude --resume <task>` (or `claude --continue` for the latest one in the folder). The first prompt after a
+    resume is always "check git status and the last commits against your note", because the session can't see what
+    changed outside it. Put experiments in a `/branch` so the main thread stays clean. And measure before you
+    optimize: a trace shows which step is slow, p95 shows what the slowest users feel, and a budget in CI tells you
+    the day it gets worse. (Phase 3 Tue)
